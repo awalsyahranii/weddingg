@@ -213,7 +213,27 @@ const floatingMenu = document.getElementById('floatingMenu');
 
 let isMusicPlaying = false;
 let hasUserManuallyPaused = false;
-let audioSynthContext = null;
+
+// Fungsi terpercaya untuk memutar lagu latar Payung Teduh - Akad
+function forcePlayAudio() {
+    if (!bgMusic) return;
+
+    bgMusic.volume = 1.0;
+    const playPromise = bgMusic.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            isMusicPlaying = true;
+            if (musicIcon) musicIcon.className = 'fa-solid fa-volume-high';
+            if (musicBtn) musicBtn.classList.remove('paused');
+        }).catch(err => {
+            console.warn("Autoplay ditahan oleh kebijakan browser (perlu sentuhan/klik pengguna):", err);
+            isMusicPlaying = false;
+            if (musicIcon) musicIcon.className = 'fa-solid fa-volume-xmark';
+            if (musicBtn) musicBtn.classList.add('paused');
+        });
+    }
+}
 
 if (btnOpen) {
     btnOpen.addEventListener('click', function () {
@@ -237,9 +257,9 @@ if (btnOpen) {
         if (floatingMenu) floatingMenu.style.display = 'block';
         if (musicBtn) musicBtn.style.display = 'flex';
 
-        // 6. Putar musik latar
+        // 6. Putar lagu Payung Teduh - Akad langsung saat tombol diklik
         hasUserManuallyPaused = false;
-        playBackgroundMusic();
+        forcePlayAudio();
 
         // 7. Bersihkan cover dari alur setelah transisi selesai
         setTimeout(() => {
@@ -249,123 +269,36 @@ if (btnOpen) {
 }
 
 // ====================================================================
-// 5. AUDIO PLAYER & AUTO-PLAY ON SCROLL / TOUCH
+// 5. FLOATING MUSIC BUTTON (PLAY / PAUSE) & FALLBACK INTERAKSI
 // ====================================================================
-function playBackgroundMusic() {
-    if (isMusicPlaying) return;
-
-    if (bgMusic) {
-        bgMusic.play().then(() => {
-            isMusicPlaying = true;
-            if (musicIcon) {
-                musicIcon.className = 'fa-solid fa-volume-high';
-            }
-            if (musicBtn) {
-                musicBtn.classList.remove('paused');
-            }
-        }).catch(err => {
-            console.log("Audio play gesture required or synth fallback:", err);
-            startRomanticMelodySynth();
-            isMusicPlaying = true;
-            if (musicBtn) musicBtn.classList.remove('paused');
-        });
-    } else {
-        startRomanticMelodySynth();
-        isMusicPlaying = true;
-    }
-}
-
-// Trigger otomatis saat user melakukan scroll, touch, wheel, atau gesture pertama
-function handleFirstUserInteraction() {
-    if (!isMusicPlaying && !hasUserManuallyPaused) {
-        playBackgroundMusic();
-    }
-}
-
-// Tambahkan event listener scroll, touchmove, wheel, dan gesture interaksi
-window.addEventListener('scroll', handleFirstUserInteraction, { passive: true });
-window.addEventListener('touchmove', handleFirstUserInteraction, { passive: true });
-window.addEventListener('wheel', handleFirstUserInteraction, { passive: true });
-window.addEventListener('touchstart', handleFirstUserInteraction, { passive: true });
-window.addEventListener('pointerdown', handleFirstUserInteraction, { passive: true });
-
 if (musicBtn) {
     musicBtn.addEventListener('click', function (e) {
         e.stopPropagation();
-        if (isMusicPlaying) {
-            if (bgMusic) bgMusic.pause();
-            if (audioSynthContext && audioSynthContext.state === 'running') {
-                audioSynthContext.suspend();
-            }
-            if (musicIcon) {
-                musicIcon.className = 'fa-solid fa-volume-xmark';
-            }
-            musicBtn.classList.add('paused');
+        if (bgMusic && !bgMusic.paused) {
+            bgMusic.pause();
             isMusicPlaying = false;
             hasUserManuallyPaused = true;
-        } else {
+            if (musicIcon) musicIcon.className = 'fa-solid fa-volume-xmark';
+            musicBtn.classList.add('paused');
+        } else if (bgMusic) {
             hasUserManuallyPaused = false;
-            if (bgMusic) {
-                bgMusic.play().catch(() => {
-                    if (audioSynthContext && audioSynthContext.state === 'suspended') {
-                        audioSynthContext.resume();
-                    } else {
-                        startRomanticMelodySynth();
-                    }
-                });
-            } else if (audioSynthContext) {
-                audioSynthContext.resume();
-            }
-            if (musicIcon) {
-                musicIcon.className = 'fa-solid fa-volume-high';
-            }
-            musicBtn.classList.remove('paused');
-            isMusicPlaying = true;
+            forcePlayAudio();
         }
     });
 }
 
-// Romantic Web Audio Synthesizer Fallback (Nada gamelan / harp lembut)
-function startRomanticMelodySynth() {
-    if (audioSynthContext) return;
-    try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        audioSynthContext = new AudioContext();
-
-        const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25]; // C D E G A C D E
-        const sequence = [0, 2, 4, 7, 5, 4, 2, 4, 0, 4, 5, 7, 4, 2, 0];
-        let seqIndex = 0;
-
-        function playNextNote() {
-            if (!audioSynthContext || audioSynthContext.state !== 'running' || !isMusicPlaying) return;
-
-            const osc = audioSynthContext.createOscillator();
-            const gain = audioSynthContext.createGain();
-
-            osc.type = 'sine';
-            const freq = notes[sequence[seqIndex % sequence.length]];
-            osc.frequency.setValueAtTime(freq, audioSynthContext.currentTime);
-
-            gain.gain.setValueAtTime(0, audioSynthContext.currentTime);
-            gain.gain.linearRampToValueAtTime(0.08, audioSynthContext.currentTime + 0.1);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioSynthContext.currentTime + 1.8);
-
-            osc.connect(gain);
-            gain.connect(audioSynthContext.destination);
-
-            osc.start();
-            osc.stop(audioSynthContext.currentTime + 1.9);
-
-            seqIndex++;
-            setTimeout(playNextNote, 600);
-        }
-
-        playNextNote();
-    } catch (e) {
-        console.log("Synthesizer error:", e);
+// Jika lagu sempat dicegah autoplay oleh browser, putar saat pengguna pertama kali berinteraksi setelah cover dibuka
+function handleFirstUserInteraction() {
+    if (hasUserManuallyPaused) return;
+    if (coverPage && !coverPage.classList.contains('cover-hidden')) return;
+    if (bgMusic && bgMusic.paused) {
+        forcePlayAudio();
     }
 }
+
+window.addEventListener('scroll', handleFirstUserInteraction, { passive: true });
+window.addEventListener('touchstart', handleFirstUserInteraction, { passive: true });
+window.addEventListener('click', handleFirstUserInteraction, { passive: true });
 
 // ====================================================================
 // 6. CONFETTI BLAST EFFECT
