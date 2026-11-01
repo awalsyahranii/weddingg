@@ -212,6 +212,26 @@ function initGuestName() {
 
     if (guestNameEl) {
         guestNameEl.textContent = formattedName;
+
+        // Skala ukuran tulisan otomatis: jika nama semakin panjang, size tulisan disesuaikan agar kartu tidak penuh
+        const charCount = formattedName.length;
+        if (charCount > 42) {
+            guestNameEl.style.fontSize = "0.92rem";
+            guestNameEl.style.lineHeight = "1.25";
+            guestNameEl.style.margin = "2px 0 4px";
+        } else if (charCount > 28) {
+            guestNameEl.style.fontSize = "1.05rem";
+            guestNameEl.style.lineHeight = "1.28";
+            guestNameEl.style.margin = "2px 0 5px";
+        } else if (charCount > 18) {
+            guestNameEl.style.fontSize = "1.22rem";
+            guestNameEl.style.lineHeight = "1.32";
+            guestNameEl.style.margin = "2px 0 5px";
+        } else {
+            guestNameEl.style.fontSize = "";
+            guestNameEl.style.lineHeight = "";
+            guestNameEl.style.margin = "";
+        }
     }
 
     // Auto-fill nama di form RSVP jika ada nama tamu di URL
