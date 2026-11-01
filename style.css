@@ -574,11 +574,13 @@ body {
 
 .guest-card-box .guest-name {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.42rem;
+    font-size: clamp(1.1rem, 4.2vw, 1.42rem);
     font-weight: 800;
     color: #ffffff;
-    margin: 2px 0 6px;
-    letter-spacing: 0.4px;
+    margin: 3px 0 6px;
+    line-height: 1.35;
+    letter-spacing: 0.3px;
+    word-break: break-word;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
 }
 

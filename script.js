@@ -154,31 +154,68 @@ const weddingData = {
 };
 
 // ====================================================================
-// 2. PARSING PARAMETER NAMA TAMU DARI URL (?nama=...)
+// 2. PARSING PARAMETER NAMA TAMU DARI URL (?to=... atau ?nama=...)
+// Mendukung tanda '&', spasi '+', dan nama panjang tanpa batas kata
 // ====================================================================
 function initGuestName() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const rawNama = urlParams.get('nama') || urlParams.get('to') || urlParams.get('u');
+    const search = window.location.search || '';
+    const href = window.location.href || '';
     const guestNameEl = document.getElementById('guestName');
     const rsvpNameInput = document.getElementById('wishes-name');
 
+    let raw = '';
+
+    // 1. Ekstrak string nama secara utuh (termasuk karakter '&' yang biasanya terpotong oleh URLSearchParams)
+    const match = (search || href).match(/[?&](?:to|nama|u|tamu|undangan)=([^#]*)/i);
+    if (match && match[1]) {
+        raw = match[1];
+        // Pisahkan jika ada parameter sistem lain seperti &sheet= atau &open=
+        const splitByKnown = raw.split(/&(?:sheet|sheet_url|open)=/i);
+        raw = splitByKnown[0];
+    } else {
+        try {
+            const urlParams = new URLSearchParams(search);
+            raw = urlParams.get('to') || urlParams.get('nama') || urlParams.get('u') || urlParams.get('tamu') || '';
+        } catch (e) {}
+    }
+
     let formattedName = "Tamu Undangan";
 
-    if (rawNama && rawNama.trim() !== "") {
-        // Decode URI component and replace any + or %20 with standard spaces
+    if (raw && raw.trim() !== "") {
+        // Amankan '%2B' (literal tanda tambah) agar tidak tertukar dengan spasi
+        let processed = raw.replace(/%2B/gi, '___PLUS_CHAR___');
+
+        // Decode URL encoding secara aman
         try {
-            formattedName = decodeURIComponent(rawNama.replace(/\+/g, ' ')).trim();
+            processed = decodeURIComponent(processed);
         } catch (e) {
-            formattedName = rawNama.replace(/\+/g, ' ').trim();
+            try {
+                processed = decodeURIComponent(processed.replace(/%(?![0-9a-fA-F]{2})/g, '%25'));
+            } catch (e2) {
+                // Biarkan apa adanya jika decode gagal
+            }
         }
+
+        // Tangani variasi penulisan '&' di URL (misal: '+&+' atau ' & ')
+        processed = processed.replace(/\+\s*&\s*\+/g, ' & ');
+        processed = processed.replace(/\s*&\s*/g, ' & ');
+
+        // Ubah semua tanda '+' pemisah kata menjadi spasi
+        processed = processed.replace(/\+/g, ' ');
+
+        // Kembalikan literal '+' jika ada yang menggunakan %2B
+        processed = processed.replace(/___PLUS_CHAR___/g, '+');
+
+        // Bersihkan spasi berlebih
+        formattedName = processed.replace(/\s+/g, ' ').trim();
     }
 
     if (guestNameEl) {
         guestNameEl.textContent = formattedName;
     }
 
-    // Auto-fill nama di form RSVP jika ada parameter
-    if (rsvpNameInput && rawNama) {
+    // Auto-fill nama di form RSVP jika ada nama tamu di URL
+    if (rsvpNameInput && raw && formattedName !== "Tamu Undangan") {
         rsvpNameInput.value = formattedName;
     }
 }
