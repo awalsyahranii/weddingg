@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGroom" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4e3ee"/>
+      <stop offset="50%" stop-color="#bacfdc"/>
+      <stop offset="100%" stop-color="#8ba8bf"/>
+    </linearGradient>
+    <linearGradient id="suitGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2b3a55"/>
+      <stop offset="100%" stop-color="#192334"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8ded0"/>
+      <stop offset="100%" stop-color="#e8beaa"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Circle -->
+  <rect width="400" height="400" fill="url(#bgGroom)"/>
+  <circle cx="200" cy="200" r="180" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.5"/>
+  
+  <!-- Warm glow -->
+  <circle cx="200" cy="140" r="120" fill="#fff" opacity="0.15"/>
+
+  <!-- Groom Silhouette & Suit -->
+  <g transform="translate(0, 20)">
+    <!-- Suit Shoulders -->
+    <path d="M100,380 C100,280 140,240 200,240 C260,240 300,280 300,380 Z" fill="url(#suitGrad)"/>
+    <!-- White Shirt V -->
+    <path d="M175,240 L200,310 L225,240 Z" fill="#ffffff"/>
+    <!-- Tie / Bowtie -->
+    <path d="M195,250 L205,250 L202,285 L198,285 Z" fill="#4c6a87"/>
+    <circle cx="200" cy="252" r="4" fill="#384e73"/>
+    
+    <!-- Neck -->
+    <rect x="185" y="190" width="30" height="55" rx="5" fill="url(#skinGrad)"/>
+    
+    <!-- Head / Face -->
+    <ellipse cx="200" cy="150" rx="42" ry="52" fill="url(#skinGrad)"/>
+    
+    <!-- Hair -->
+    <path d="M154,145 C154,95 180,85 220,90 C245,95 248,125 246,145 C238,115 220,105 185,108 C165,110 156,125 154,145 Z" fill="#231b15"/>
+    <path d="M152,140 C150,165 156,170 158,150 Z" fill="#231b15"/>
+    <path d="M245,140 C247,165 242,170 240,150 Z" fill="#231b15"/>
+  </g>
+
+  <!-- Pocket Flower Corsage -->
+  <g transform="translate(150, 310)">
+    <circle cx="0" cy="0" r="6" fill="#ecd7be"/>
+    <circle cx="6" cy="-4" r="4" fill="#dfc19c"/>
+    <path d="M2,2 L10,12" stroke="#7a9ab5" stroke-width="2"/>
+  </g>
+</svg>

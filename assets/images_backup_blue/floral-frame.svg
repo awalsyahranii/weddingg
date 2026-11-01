@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#2b3a55" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Outer subtle circular rings -->
+  <circle cx="150" cy="150" r="136" stroke="#d9b68a" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.75" />
+  <circle cx="150" cy="150" r="142" stroke="#94b2cd" stroke-width="1.2" opacity="0.6" />
+
+  <!-- Botanical Wreath Elements Around Border -->
+  <g filter="url(#shadow)">
+    <!-- Top-Right Floral Cluster -->
+    <path d="M150,12 C190,12 245,45 270,90" stroke="#7a9ab5" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M190,20 C200,8 218,12 215,26 C210,34 195,30 190,20 Z" fill="#84a6c4" opacity="0.85"/>
+    <path d="M225,35 C240,25 255,38 248,50 C238,56 225,48 225,35 Z" fill="#9bb7ce" opacity="0.85"/>
+    <path d="M255,65 C270,60 278,78 268,88 C256,92 248,80 255,65 Z" fill="#759bbd" opacity="0.8"/>
+    <!-- Champagne Flowers -->
+    <circle cx="210" cy="35" r="7" fill="#dfc19c"/>
+    <circle cx="210" cy="35" r="3" fill="#a47b4d"/>
+    <circle cx="245" cy="58" r="8" fill="#ecd7be"/>
+    <circle cx="245" cy="58" r="3.5" fill="#a47b4d"/>
+    <circle cx="268" cy="92" r="6" fill="#dfc19c"/>
+
+    <!-- Bottom-Left Floral Cluster -->
+    <path d="M150,288 C110,288 55,255 30,210" stroke="#7a9ab5" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M110,280 C100,292 82,288 85,274 C90,266 105,270 110,280 Z" fill="#84a6c4" opacity="0.85"/>
+    <path d="M75,265 C60,275 45,262 52,250 C62,244 75,252 75,265 Z" fill="#9bb7ce" opacity="0.85"/>
+    <path d="M45,235 C30,240 22,222 32,212 C44,208 52,220 45,235 Z" fill="#759bbd" opacity="0.8"/>
+    <!-- Champagne Flowers -->
+    <circle cx="90" cy="265" r="7" fill="#dfc19c"/>
+    <circle cx="90" cy="265" r="3" fill="#a47b4d"/>
+    <circle cx="55" cy="242" r="8" fill="#ecd7be"/>
+    <circle cx="55" cy="242" r="3.5" fill="#a47b4d"/>
+    <circle cx="32" cy="208" r="6" fill="#dfc19c"/>
+
+    <!-- Top-Left Accent Leaf -->
+    <path d="M60,60 C45,45 65,30 80,45 C85,60 70,75 60,60 Z" fill="#9bb7ce" opacity="0.75"/>
+    <circle cx="70" cy="50" r="4.5" fill="#e8d5bc"/>
+
+    <!-- Bottom-Right Accent Leaf -->
+    <path d="M240,240 C255,255 235,270 220,255 C215,240 230,225 240,240 Z" fill="#9bb7ce" opacity="0.75"/>
+    <circle cx="230" cy="250" r="4.5" fill="#e8d5bc"/>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" fill="none">
+  <defs>
+    <filter id="archShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#2b3a55" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Arched double border outline -->
+  <g filter="url(#archShadow)">
+    <path d="M40,380 L40,160 C40,93.7 93.7,40 160,40 C226.3,40 280,93.7 280,160 L280,380 Z" fill="none" stroke="#d9b68a" stroke-width="2"/>
+    <path d="M48,375 L48,160 C48,98.1 98.1,48 160,48 C221.9,48 272,98.1 272,160 L272,375 Z" fill="none" stroke="#94b2cd" stroke-width="1.2" stroke-dasharray="6 4"/>
+  </g>
+
+  <!-- Bottom corner floral ornaments -->
+  <!-- Left Bottom Floral -->
+  <g transform="translate(15, 330)">
+    <path d="M25,50 C10,30 25,10 40,20 C45,35 30,55 25,50 Z" fill="#94b2cd" opacity="0.8"/>
+    <path d="M5,40 C0,20 18,10 28,25 C30,38 15,48 5,40 Z" fill="#759bbd" opacity="0.75"/>
+    <circle cx="35" cy="20" r="5.5" fill="#dfc19c"/>
+    <circle cx="20" cy="35" r="4" fill="#ecd7be"/>
+  </g>
+
+  <!-- Right Bottom Floral -->
+  <g transform="translate(250, 330)">
+    <path d="M35,50 C50,30 35,10 20,20 C15,35 30,55 35,50 Z" fill="#94b2cd" opacity="0.8"/>
+    <path d="M55,40 C60,20 42,10 32,25 C30,38 45,48 55,40 Z" fill="#759bbd" opacity="0.75"/>
+    <circle cx="25" cy="20" r="5.5" fill="#dfc19c"/>
+    <circle cx="40" cy="35" r="4" fill="#ecd7be"/>
+  </g>
+</svg>

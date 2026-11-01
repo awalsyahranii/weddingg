@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="color-scheme" content="only light">
+    <meta name="supported-color-schemes" content="light">
+    <meta name="theme-color" content="#961c36">
+    <meta name="msapplication-navbutton-color" content="#961c36">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Undangan Pernikahan - Hari & Dilla</title>
+
+    <!-- Meta SEO & Open Graph -->
+    <meta name="description"
+        content="Undangan Pernikahan Digital Hari Irawal Muhammad, S.Kom & Nurpadilla - 7 & 8 November 2026. Kami mengundang Anda untuk merayakan hari bahagia kami.">
+    <meta property="og:title" content="The Wedding of Hari & Dilla">
+    <meta property="og:description" content="Sabtu - Minggu, 7 - 8 November 2026. Buka undangan digital kami di sini.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="body-root">
+
+    <!-- Wadah Efek Daun Berguguran -->
+    <div id="leaves-container" class="leaves-container" aria-hidden="true"></div>
+
+    <!-- Audio Player Latar Belakang -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/audio/Payung-Teduh-Akad.mp3" type="audio/mpeg">
+        <source src="assets/audio/Payung-Teduh-Akad.m4a" type="audio/mp4">
+    </audio>
+
+    <!-- Toast Notification (Notifikasi Salin Teks) -->
+    <div id="toast" class="toast-notification">Teks berhasil disalin ke clipboard!</div>
+
+    <!-- =========================================
+         1. COVER / HALAMAN PEMBUKA FULLSCREEN
+         ========================================= -->
+    <div class="cover-container" id="cover-page">
+        <!-- Blurred Photo Background & Soft Overlay -->
+        <div class="cover-bg-blur"></div>
+        <div class="cover-bg-overlay"></div>
+
+        <!-- 4 Ornamen Bunga Sudut (Atas Kiri & Kanan, Bawah Kiri & Kanan) -->
+        <img src="assets/images/bungakiri.png" alt="Ornamen Bunga Kiri Atas" class="cover-corner-flower top-left">
+        <img src="assets/images/bungakiri.png" alt="Ornamen Bunga Kanan Atas" class="cover-corner-flower top-right">
+        <img src="assets/images/bungakiri.png" alt="Ornamen Bunga Kiri Bawah" class="cover-corner-flower bottom-left">
+        <img src="assets/images/bungakiri.png" alt="Ornamen Bunga Kanan Bawah" class="cover-corner-flower bottom-right">
+
+        <!-- Konten Cover -->
+        <div class="cover-content">
+            <!-- 1. Header & Nama di Atas -->
+            <div class="cover-header-group">
+                <span class="cover-tagline">THE WEDDING OF</span>
+                <h1 class="cover-title-name" id="cover-couple-name">Hari &amp; Dilla</h1>
+            </div>
+
+            <!-- 2. Foto di Tengah dengan Arched Luxury Frame, Gold Border & Dekorasi Bunga -->
+            <div class="cover-photo-container">
+                <div class="cover-photo-glow"></div>
+                <div class="cover-photo-box">
+                    <div class="cover-photo-frame-wrap">
+                        <img src="assets/foto/foto4.JPG" alt="Foto Hari & Dilla" class="cover-photo">
+                        <div class="cover-photo-border-ring"></div>
+                    </div>
+                    <!-- Dekorasi Bunga Presisi di Tepi Bingkai Foto (Kanan & Kiri Bawah) -->
+                    <img src="assets/images/bungakiri.png" alt="Dekorasi Bunga Tepi Kiri Bawah"
+                        class="cover-frame-flower flower-bottom-left">
+                    <img src="assets/images/bungakiri.png" alt="Dekorasi Bunga Tepi Kanan Bawah"
+                        class="cover-frame-flower flower-bottom-right">
+                </div>
+            </div>
+
+            <!-- 3. Blurred Photo Glassmorphism Guest Card Box -->
+            <div class="guest-card-box">
+                <div class="guest-card-bg-blur"></div>
+                <div class="guest-card-content">
+                    <p class="greeting-title">Kepada Yth.</p>
+                    <p class="greeting-subtitle">Bapak/Ibu/Saudara/i</p>
+                    <h2 class="guest-name" id="guestName">Tamu Undangan</h2>
+                    <p class="guest-location">Di Tempat</p>
+                </div>
+            </div>
+
+            <!-- 4. Tombol Buka Undangan Modern Pulse -->
+            <button class="btn-open" id="btn-open-invite" aria-label="Buka Undangan">
+                <span class="btn-open-icon"><i class="fa-solid fa-envelope-open-text"></i></span>
+                <span class="btn-open-text">Buka Undangan</span>
+                <span class="btn-open-arrow"><i class="fa-solid fa-chevron-right"></i></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- =========================================
+         MAIN CONTENT WRAPPER
+         ========================================= -->
+    <main class="main-wrapper" id="mainContent">
+
+        <!-- =========================================
+             2. HERO SECTION / HOMEPAGE
+             ========================================= -->
+        <section class="hero-section" id="home">
+            <img src="assets/images/bungakiri.png" alt="Ornamen Kiri Atas" class="corner-flower-top left-corner">
+            <img src="assets/images/bungakiri.png" alt="Ornamen Kanan Atas" class="corner-flower-top right-corner">
+
+            <div class="hero-inner">
+                <span class="hero-pill-badge fade-in">Save The Date</span>
+                <h3 class="wedding-subtitle fade-in">Undangan Pernikahan</h3>
+
+                <div class="hero-img-container fade-in">
+                    <img src="assets/foto/foto1.JPG" alt="Foto Prewedding Hari & Dilla" class="hero-photo">
+                    <img src="assets/images/bulatbunga1.png" alt="Bingkai Bunga" class="hero-frame">
+                </div>
+
+                <h1 class="couple-name fade-in" id="hero-couple-name">Hari & Dilla</h1>
+                <p class="wedding-date fade-in" id="hero-date-range">07 - 08 November 2026</p>
+
+                <!-- Countdown Timer Realtime -->
+                <div class="countdown-wrapper fade-in">
+                    <div class="countdown-title">Hitung Mundur Menuju Hari Bahagia</div>
+                    <div class="countdown-container" id="countdown">
+                        <div class="countdown-box">
+                            <span class="count-number" id="hari">00</span>
+                            <span class="count-label">Hari</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="count-number" id="jam">00</span>
+                            <span class="count-label">Jam</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="count-number" id="menit">00</span>
+                            <span class="count-label">Menit</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="count-number" id="detik">00</span>
+                            <span class="count-label">Detik</span>
+                        </div>
+                    </div>
+                    <p id="countdown-status" class="countdown-status"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             3. SECTION DO'A & AYAT SUCI (QUOTE)
+             ========================================= -->
+        <section class="verse-section" id="doa">
+            <div class="verse-container fade-in">
+                <div class="verse-card">
+                    <!-- Ornamen Garland Atas -->
+                    <div class="verse-ornament-wrapper">
+                        <img src="assets/images/bungatengah.png" alt="Ornamen Bunga" class="verse-ornament">
+                    </div>
+
+                    <!-- Kaligrafi Bismillah -->
+                    <div class="verse-bismillah" dir="rtl">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+
+                    <!-- Ikon Quote -->
+                    <div class="quote-icon">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
+
+                    <!-- Teks Ayat Suci Arab -->
+                    <p class="verse-arabic" id="quote-arabic" dir="rtl">
+                        وَاَنْكِحُوا الْاَيَامٰى مِنْكُمْ وَالصّٰلِحِيْنَ مِنْ عِبَادِكُمْ وَاِمَاۤىِٕكُمْۗ اِنْ
+                        يَّكُوْنُوْا فُقَرَاۤءَ يُغْنِهِمُ اللّٰهُ مِنْ فَضْلِهٖۗ وَاللّٰهُ وَاسِعٌ عَلِيْمٌ
+                    </p>
+
+                    <!-- Terjemahan Ayat Suci -->
+                    <blockquote class="verse-text" id="quote-text">
+                        "Dan nikahkanlah orang-orang yang masih membujang di antara kamu, dan juga orang-orang yang
+                        layak (menikah) dari hamba-hamba sahayamu yang laki-laki dan perempuan. Jika mereka miskin,
+                        Allah akan memberi kemampuan kepada mereka dengan karunia-Nya. Dan Allah Maha Luas
+                        (pemberian-Nya), Maha Mengetahui."
+                    </blockquote>
+
+                    <!-- Pemisah Garis Ornamen -->
+                    <div class="verse-divider">
+                        <span class="line"></span>
+                        <i class="fa-solid fa-heart"></i>
+                        <span class="line"></span>
+                    </div>
+
+                    <!-- Badge Surah -->
+                    <div class="verse-badge" id="quote-source">
+                        <i class="fa-solid fa-book-quran"></i> QS. An-Nur : 32
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             4. SECTION MEMPELAI (THE BRIDE & GROOM)
+             ========================================= -->
+        <section class="couple-section" id="mempelai">
+            <div class="couple-card-unified fade-in">
+                <!-- Ornamen Sudut Kartu -->
+                <img src="assets/images/bungakiri.png" alt="Ornamen Sudut" class="card-corner-ornament top-left">
+                <img src="assets/images/bungakiri.png" alt="Ornamen Sudut" class="card-corner-ornament top-right">
+                <img src="assets/images/bungakiri.png" alt="Ornamen Sudut" class="card-corner-ornament bottom-left">
+                <img src="assets/images/bungakiri.png" alt="Ornamen Sudut" class="card-corner-ornament bottom-right">
+
+                <!-- Header Salam & Sambutan -->
+                <div class="couple-header-content">
+                    <img src="assets/images/bungatengah.png" alt="Rangkaian Bunga" class="card-header-garland">
+                    <span class="section-tagline">THE GROOM & THE BRIDE</span>
+                    <h2 class="script-title salam-title">Assalamu'alaikum Wr. Wb.</h2>
+                    <div class="couple-divider">
+                        <span class="line"></span>
+                        <i class="fa-solid fa-heart"></i>
+                        <span class="line"></span>
+                    </div>
+                    <p class="intro-text">
+                        Maha Suci Allah SWT yang telah menciptakan makhluk-Nya berpasang-pasangan. Tanpa mengurangi rasa
+                        hormat, kami mengundang Bapak/Ibu/Saudara/i serta kerabat sekalian untuk menghadiri acara
+                        pernikahan kami:
+                    </p>
+                </div>
+
+                <!-- Profil Mempelai Pria -->
+                <div class="profile-block">
+                    <div class="profile-img-container">
+                        <img src="assets/foto/foto7.JPG" alt="Foto Hari Irawal Muhammad, S.Kom" class="profile-img"
+                            id="groom-img">
+                        <img src="assets/images/bulatbunga1.png" alt="Bingkai Bunga" class="flower-frame">
+                    </div>
+                    <span class="couple-badge">Mempelai Pria</span>
+                    <h3 class="script-title name-title" id="groom-name">Hari Irawal Muhammad, S.Kom</h3>
+                    <div class="parents-box">
+                        <p class="parents-text" id="groom-parents">
+                            Anak Ketiga dari Bapak Munir Husein Muhammad, S.Kom<br>& Ibu Sitti Nurbaya
+                        </p>
+                    </div>
+                    <a href="https://www.instagram.com/hari_irawalmuh/" target="_blank" rel="noopener noreferrer"
+                        class="btn-instagram" aria-label="Instagram Hari Irawal">
+                        <i class="fa-brands fa-instagram"></i> @hari_irawalmuh
+                    </a>
+                </div>
+
+                <!-- Simbol Penghubung Cinta & -->
+                <div class="ampersand-divider">
+                    <span class="ampersand-line"></span>
+                    <div class="ampersand-circle">
+                        <span>&amp;</span>
+                    </div>
+                    <span class="ampersand-line"></span>
+                </div>
+
+                <!-- Profil Mempelai Wanita -->
+                <div class="profile-block">
+                    <div class="profile-img-container">
+                        <img src="assets/foto/foto6.JPG" alt="Foto Nurpadilla" class="profile-img" id="bride-img">
+                        <img src="assets/images/bulatbunga1.png" alt="Bingkai Bunga" class="flower-frame">
+                    </div>
+                    <span class="couple-badge">Mempelai Wanita</span>
+                    <h3 class="script-title name-title" id="bride-name">Nurpadilla</h3>
+                    <div class="parents-box">
+                        <p class="parents-text" id="bride-parents">
+                            Anak Kedua dari Bapak Alm. Ansari Ibrahim<br>& Ibu Kasmawati
+                        </p>
+                    </div>
+                    <a href="https://www.instagram.com/nurpadilla_10/" target="_blank" rel="noopener noreferrer"
+                        class="btn-instagram" aria-label="Instagram Nurpadilla">
+                        <i class="fa-brands fa-instagram"></i> @nurpadilla_10
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             5. SECTION DETAIL ACARA & LOKASI
+             ========================================= -->
+        <section class="event-section" id="acara">
+            <div class="event-header-container fade-in">
+                <span class="event-badge"><i class="fa-regular fa-calendar-check"></i> WEDDING EVENTS</span>
+                <h2 class="script-title section-title-light">Waktu &amp; Tempat Acara</h2>
+                <p class="event-subtitle">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan
+                    acara pernikahan pada:</p>
+            </div>
+
+            <!-- Banner Foto Acara -->
+            <div class="event-photo-container fade-in">
+                <img src="assets/foto/foto2.JPG" alt="Foto Prewedding Hari & Dilla" class="event-photo">
+            </div>
+
+            <!-- Kartu Akad Nikah -->
+            <div class="event-card-box fade-in">
+                <div class="event-icon-circle">
+                    <i class="fa-solid fa-ring"></i>
+                </div>
+                <h3 class="script-title event-card-title">Akad Nikah</h3>
+
+                <div class="event-info-item">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <span id="akad-date">Sabtu, 7 November 2026</span>
+                </div>
+
+                <div class="event-info-item">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="akad-time">Pukul 10:00 WITA</span>
+                </div>
+
+                <div class="event-info-item location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p id="akad-location">
+                        <strong>Kediaman Mempelai Wanita:</strong><br>
+                        Kaluku Bodoa, Kec. Tallo, Kota Makassar, Sulawesi Selatan (90163)
+                    </p>
+                </div>
+
+                <!-- Google Maps Embed Akad -->
+                <div class="event-map-container">
+                    <iframe id="akad-map-iframe"
+                        src="https://maps.google.com/maps?q=-5.1108665,119.4317250&amp;hl=id&amp;z=16&amp;output=embed"
+                        width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin" title="Lokasi Akad Nikah">
+                    </iframe>
+                </div>
+
+                <a href="https://maps.app.goo.gl/sq3sRdZH3FFj4Lhc7" target="_blank" rel="noopener noreferrer"
+                    class="btn-action btn-map" id="btn-open-maps-akad">
+                    <i class="fa-solid fa-map-location-dot"></i> Buka Peta Lokasi Akad
+                </a>
+            </div>
+
+            <div class="event-section-divider fade-in">
+                <span></span>
+                <i class="fa-solid fa-heart"></i>
+                <span></span>
+            </div>
+
+            <!-- Kartu Resepsi -->
+            <div class="event-card-box fade-in">
+                <div class="event-icon-circle">
+                    <i class="fa-solid fa-champagne-glasses"></i>
+                </div>
+                <h3 class="script-title event-card-title">Resepsi</h3>
+
+                <div class="event-info-item">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <span id="resepsi-date">Minggu, 8 November 2026</span>
+                </div>
+
+                <div class="event-info-item">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="resepsi-time">Pukul 11:00 - 14:30 WITA</span>
+                </div>
+
+                <div class="event-info-item location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p id="resepsi-location">
+                        <strong>Gedung Serbaguna Aisyiyah:</strong><br>
+                        Jl. Jend. M. Jusuf / Jl. Gn. Bulusaraung No. 93, Kel. Pattunuang, Kec. Wajo, Kota Makassar, Sulawesi Selatan (90156)
+                    </p>
+                </div>
+
+                <!-- Google Maps Embed Resepsi -->
+                <div class="event-map-container">
+                    <iframe id="google-map-iframe"
+                        src="https://maps.google.com/maps?q=cid:13269756163400754400&amp;hl=id&amp;z=16&amp;output=embed"
+                        width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin" title="Lokasi Resepsi Pernikahan">
+                    </iframe>
+                </div>
+
+                <a href="https://maps.app.goo.gl/tcAZAQ18Gau8zuqt7" target="_blank" rel="noopener noreferrer"
+                    class="btn-action btn-map" id="btn-open-maps">
+                    <i class="fa-solid fa-map-location-dot"></i> Buka Peta Lokasi Resepsi
+                </a>
+            </div>
+        </section>
+
+        <!-- =========================================
+             6. SECTION OUR LOVE STORY
+             ========================================= -->
+        <section class="story-section" id="story">
+            <div class="story-title-wrapper fade-in">
+                <h2 class="story-bg-text">JOURNEY</h2>
+                <span class="script-title story-script-title">Our Love Story</span>
+            </div>
+
+            <div class="story-timeline">
+                <!-- Milestone 1 -->
+                <div class="story-item fade-in">
+                    <div class="story-node">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-photo-wrapper tilt-left">
+                            <img src="assets/foto/foto8.JPG" alt="Awal Pertemuan 2022"
+                                class="story-photo story-photo-1">
+                        </div>
+                        <div class="story-badge">2022</div>
+                        <h3 class="story-heading">PERKENALAN</h3>
+                        <div class="story-divider"></div>
+                        <p class="story-desc">
+                            Kami berdua tidak direncanakan untuk bertemu, tapi dipertemukan oleh satu cinta yang sama.
+                            Bukan cinta yang biasa, melainkan cinta yang berteriak lantang di tribun, cinta yang memakai
+                            nama Indonesia. Ya, cinta terhadap Timnas Indonesia.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 -->
+                <div class="story-item fade-in">
+                    <div class="story-node">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-photo-wrapper tilt-right">
+                            <img src="assets/foto/foto12.JPG" alt="Menjalin Hubungan 2023"
+                                class="story-photo story-photo-2">
+                        </div>
+                        <div class="story-badge">2023</div>
+                        <h3 class="story-heading">MENJALIN HUBUNGAN</h3>
+                        <div class="story-divider"></div>
+                        <p class="story-desc">
+                            Di satu tempat yang menaungi ribuan rasa itu, di dalam keluarga besar bernama Ultras Garuda
+                            Indonesia Sezione Makassar, akhirnya kami saling menemukan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 -->
+                <div class="story-item fade-in">
+                    <div class="story-node">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-photo-wrapper tilt-left">
+                            <img src="assets/foto/foto3.JPG" alt="Lamaran 2025" class="story-photo story-photo-3">
+                        </div>
+                        <div class="story-badge">2025</div>
+                        <h3 class="story-heading">LAMARAN</h3>
+                        <div class="story-divider"></div>
+                        <p class="story-desc">
+                            Dari chant yang sama, dari harapan yang sama, tumbuh rasa yang kini menjadi milik kami
+                            berdua.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 4 -->
+                <div class="story-item fade-in">
+                    <div class="story-node">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-photo-wrapper tilt-right">
+                            <img src="assets/foto/foto5.JPG" alt="Pernikahan 2026" class="story-photo story-photo-4">
+                        </div>
+                        <div class="story-badge">2026</div>
+                        <h3 class="story-heading">PERNIKAHAN</h3>
+                        <div class="story-divider"></div>
+                        <p class="story-desc">
+                            Hingga akhirnya, dari tribun stadion kami berlabuh di tribun yang paling abadi: pelaminan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             7. SECTION GALERI FOTO & LIGHTBOX
+             ========================================= -->
+        <section class="gallery-gift-section" id="gallery">
+            <div class="gallery-header-wrapper fade-in">
+                <span class="gallery-tagline">MOMENTS OF HAPPINESS</span>
+                <h2 class="script-title">Our Gallery</h2>
+                <p class="gallery-subtitle">Potret kebersamaan dan kenangan manis dalam perjalanan cinta kami</p>
+            </div>
+
+            <div class="gallery-grid fade-in" id="gallery-grid">
+                <!-- 1. Featured Big Arch (Full Width Dome) -->
+                <div class="gallery-item item-featured-arch" data-index="0"
+                    data-caption="The Sacred Vow - Hari &amp; Dilla">
+                    <img src="assets/foto/foto4.JPG" alt="The Sacred Vow - Hari &amp; Dilla" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Hari &amp; Dilla</span>
+                    </div>
+                </div>
+
+                <!-- 2. Tall Left Portrait with Soft Bottom Curve -->
+                <div class="gallery-item item-tall-left" data-index="1"
+                    data-caption="Golden Hour Promise - Di Bawah Langit Senja">
+                    <img src="assets/foto/foto1.JPG" alt="Golden Hour Promise" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Langit Senja</span>
+                    </div>
+                </div>
+
+                <!-- 3. Curved Top-Right Arch -->
+                <div class="gallery-item item-arch-right" data-index="2"
+                    data-caption="Eternal Blossom - Mahligai Kasih">
+                    <img src="assets/foto/foto2.JPG" alt="Eternal Blossom" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Mahligai Kasih</span>
+                    </div>
+                </div>
+
+                <!-- 4. Wide Panoramic Cinema Banner -->
+                <div class="gallery-item item-wide-cinema" data-index="3"
+                    data-caption="Tahta Kasih - Bersanding Bersama">
+                    <img src="assets/foto/foto3.JPG" alt="Tahta Kasih" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Bersanding Bersama</span>
+                    </div>
+                </div>
+
+                <!-- 5. Arch Left (Mempelai Pria Hari) -->
+                <div class="gallery-item item-arch-left" data-index="4"
+                    data-caption="The Groom - Hari Irawal Muhammad, S.Kom">
+                    <img src="assets/foto/foto7.JPG" alt="Mempelai Pria Hari" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Hari Irawal</span>
+                    </div>
+                </div>
+
+                <!-- 6. Tall Right (Mempelai Wanita Dilla) -->
+                <div class="gallery-item item-tall-right" data-index="5" data-caption="The Bride - Nurpadilla">
+                    <img src="assets/foto/foto6.JPG" alt="Mempelai Wanita Nurpadilla" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Nurpadilla</span>
+                    </div>
+                </div>
+
+                <!-- 7. Wide Cinema Banner (Tatapan Kasih) -->
+                <div class="gallery-item item-wide-cinema" data-index="6" data-caption="Tatapan Kasih - Janji Suci">
+                    <img src="assets/foto/foto5.JPG" alt="Tatapan Kasih" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Tatapan Kasih</span>
+                    </div>
+                </div>
+
+                <!-- 8. Tall Left Arch (Jejak Tradisi Lontara) -->
+                <div class="gallery-item item-tall-left" data-index="7" data-caption="Jejak Tradisi - Aksara Lontara">
+                    <img src="assets/foto/foto8.JPG" alt="Jejak Tradisi Lontara" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Aksara Lontara</span>
+                    </div>
+                </div>
+
+                <!-- 9. Arch Right (Harmoni Jiwa) -->
+                <div class="gallery-item item-arch-right" data-index="8" data-caption="Harmoni Jiwa - Kasih Selaras">
+                    <img src="assets/foto/foto9.JPG" alt="Harmoni Jiwa" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Harmoni Jiwa</span>
+                    </div>
+                </div>
+
+                <!-- 10. Oval Left Arch (Cita & Kasih) -->
+                <div class="gallery-item item-oval-left" data-index="9"
+                    data-caption="Cita &amp; Kasih - Senyuman Abadi">
+                    <img src="assets/foto/foto10.JPG" alt="Cita &amp; Kasih" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Senyuman Abadi</span>
+                    </div>
+                </div>
+
+                <!-- 11. Oval Right Arch (Pelukan Takdir) -->
+                <div class="gallery-item item-oval-right" data-index="10"
+                    data-caption="Pelukan Takdir - Langkah Bersama">
+                    <img src="assets/foto/foto11.JPG" alt="Pelukan Takdir" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Langkah Bersama</span>
+                    </div>
+                </div>
+
+                <!-- 12. Featured Big Arch (Duduk Bersimpuh Adat) -->
+                <div class="gallery-item item-featured-arch" data-index="11"
+                    data-caption="Duduk Bersimpuh Adat - Mappasikarawa">
+                    <img src="assets/foto/foto12.JPG" alt="Duduk Bersimpuh Adat" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Mappasikarawa Adat</span>
+                    </div>
+                </div>
+
+                <!-- 13. Wide Panoramic Cinema Banner (Together to Jannah) -->
+                <div class="gallery-item item-wide-cinema" data-index="12"
+                    data-caption="Together to Jannah - Menuju Keabadian">
+                    <img src="assets/foto/foto13.JPG" alt="Together to Jannah" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        <span class="gallery-pill-caption">Menuju Keabadian</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 8. SECTION WEDDING GIFT / AMPLOP DIGITAL
+                 ========================================= -->
+            <div class="gift-wrapper fade-in" id="hadiah">
+                <div class="gift-icon-badge">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <h2 class="script-title">Amplop Digital</h2>
+                <p class="gift-text">
+                    Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Jika memberi adalah ungkapan tanda
+                    kasih, Anda dapat memberikan kado dan tanda kasih secara cashless melalui:
+                </p>
+
+                <!-- Kotak Kartu Rekening (Langsung Tampil) -->
+                <div class="gift-cards-container" id="gift-cards">
+
+                    <!-- Kartu ATM Bank Mandiri Digital -->
+                    <div class="atm-card-wrapper">
+                        <img src="assets/images/mandiri-card.svg" alt="Kartu ATM Mandiri Hari Irawal Muhammad"
+                            class="atm-card-img">
+
+                        <div class="atm-card-actions">
+                            <div class="atm-info-badge">
+                                <span class="atm-bank-name"><i class="fa-solid fa-building-columns"></i> Bank
+                                    Mandiri</span>
+                                <span class="atm-acc-num" id="rek-mandiri">1740003066495</span>
+                            </div>
+                            <button class="btn-copy btn-copy-card" onclick="copyText('rek-mandiri', this)"
+                                aria-label="Salin Rekening Mandiri">
+                                <i class="fa-regular fa-copy"></i> Salin No. Rekening
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Kirim Hadiah Fisik -->
+                    <div class="address-card">
+                        <div class="gift-badge-header">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        <h3>Kirim Hadiah Fisik</h3>
+                        <p class="gift-subtitle">Bagi keluarga &amp; sahabat yang ingin mengirimkan kado fisik, dapat
+                            ditujukan ke alamat berikut:</p>
+
+                        <div class="gift-info-list">
+                            <div class="gift-info-item">
+                                <div class="gift-info-icon"><i class="fa-solid fa-user"></i></div>
+                                <div class="gift-info-content">
+                                    <span class="gift-info-label">Nama Penerima</span>
+                                    <span class="gift-info-value">Hari Irawal Muhammad / Nurpadilla</span>
+                                </div>
+                            </div>
+
+                            <div class="gift-info-item">
+                                <div class="gift-info-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                                <div class="gift-info-content">
+                                    <span class="gift-info-label">No. HP / WhatsApp</span>
+                                    <span class="gift-info-value">+62 815-2409-8247</span>
+                                </div>
+                            </div>
+
+                            <div class="gift-info-item">
+                                <div class="gift-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="gift-info-content">
+                                    <span class="gift-info-label">Alamat Lengkap</span>
+                                    <span class="gift-info-value" id="gift-address-text">Gedung Serbaguna Aisyiyah, Jl. Jend. M. Jusuf / Jl. Gn. Bulusaraung No. 93, Kel. Pattunuang, Kec. Wajo, Kota Makassar, Sulawesi Selatan (90156)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="address-btn-group">
+                            <button class="btn-copy-address" onclick="copyAddress(this)">
+                                <i class="fa-regular fa-copy"></i> Salin Alamat Lengkap
+                            </button>
+                            <a href="https://wa.me/6281524098247?text=Halo%20Hari%20%26%20Dilla,%20saya%20ingin%20konfirmasi%20pengiriman%20kado%20pernikahan..."
+                                target="_blank" rel="noopener noreferrer" class="btn-wa-gift">
+                                <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             9. SECTION RSVP & BUKU UCAPAN (BEST WISHES)
+             ========================================= -->
+        <section class="wishes-section" id="ucapan">
+            <div class="wishes-title-wrapper fade-in">
+                <h2 class="wishes-bg-text">RSVP &amp; WISHES</h2>
+                <span class="script-title wishes-script-title">Ucapan &amp; Doa</span>
+            </div>
+            <p class="wishes-subtitle fade-in">Berikan doa restu dan konfirmasi kehadiran Anda untuk kedua mempelai</p>
+
+            <div class="wishes-container fade-in">
+                <!-- Form RSVP & Kirim Ucapan -->
+                <form class="wishes-form" id="wishes-form">
+                    <div class="form-group">
+                        <label for="wishes-name"><i class="fa-regular fa-user"></i> Nama Lengkap</label>
+                        <input type="text" id="wishes-name" placeholder="Tuliskan nama Anda..." required
+                            autocomplete="name">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="wishes-attendance"><i class="fa-regular fa-circle-check"></i> Konfirmasi
+                                Kehadiran</label>
+                            <div class="select-wrapper">
+                                <select id="wishes-attendance" required>
+                                    <option value="Hadir" selected>✓ Hadir</option>
+                                    <option value="Ragu-ragu">? Masih Ragu-ragu</option>
+                                    <option value="Tidak Hadir">✗ Maaf, Tidak Bisa Hadir</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="wishes-guest-count"><i class="fa-solid fa-users"></i> Jumlah Tamu</label>
+                            <div class="select-wrapper">
+                                <select id="wishes-guest-count">
+                                    <option value="1 Orang" selected>1 Orang</option>
+                                    <option value="2 Orang">2 Orang</option>
+                                    <option value="3 Orang">3 Orang</option>
+                                    <option value="4+ Orang">4+ Orang (Rombongan)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wishes-message"><i class="fa-regular fa-comment-dots"></i> Ucapan &amp; Doa
+                            Restu</label>
+                        <textarea id="wishes-message" rows="3"
+                            placeholder="Tuliskan ucapan dan doa terbaik Anda untuk Hari & Dilla..."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-send-wish" id="btn-submit-wish">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Ucapan &amp; RSVP
+                    </button>
+                </form>
+
+                <!-- Counter Header Bar -->
+                <div class="wishes-header-bar">
+                    <div class="wishes-count">
+                        <i class="fa-solid fa-comments"></i> <span id="wishes-total-count">3</span> Ucapan &amp; Doa
+                        Masuk
+                    </div>
+                </div>
+
+                <!-- List Daftar Ucapan yang Masuk -->
+                <div class="wishes-list" id="wishes-list" role="feed" aria-label="Daftar Ucapan Tamu">
+                    <!-- Dirender secara dinamis oleh JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+             10. SECTION CLOSING / PENUTUP
+             ========================================= -->
+        <section class="closing-section">
+            <div class="closing-img-container fade-in">
+                <img src="assets/foto/foto13.JPG" alt="Foto Penutup" class="closing-photo">
+                <img src="assets/images/bulatbunga1.png" alt="Bingkai Bunga Penutup" class="closing-frame">
+            </div>
+
+            <p class="closing-text fade-in">
+                Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan
+                memberikan doa restu. Atas kehadiran serta doa tulusnya, kami mengucapkan terima kasih yang tak
+                terhingga.
+            </p>
+
+            <p class="closing-salam fade-in">Wassalamu'alaikum Wr. Wb.</p>
+            <h2 class="script-title fade-in closing-couple-name" id="closing-couple-name">Hari &amp; Dilla</h2>
+
+            <div class="closing-footer-note">
+                <p>Designed with love for our special day by KisahSAH</p>
+            </div>
+
+            <img src="assets/images/bungakiri.png" alt="Ornamen Bunga Kiri" class="corner-flower left-corner">
+            <img src="assets/images/bungakiri.png" alt="Ornamen Bunga Kanan" class="corner-flower right-corner">
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         11. FLOATING NAVIGATION DOCK
+         ========================================= -->
+    <nav class="floating-menu" id="floatingMenu" style="display: none;" aria-label="Menu Navigasi Undangan">
+        <ul>
+            <li><a href="#home" title="Home" class="nav-link active"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="#doa" title="Doa & Kutipan" class="nav-link"><i class="fa-solid fa-book-open"></i></a></li>
+            <li><a href="#mempelai" title="Mempelai" class="nav-link"><i class="fa-solid fa-heart"></i></a></li>
+            <li><a href="#acara" title="Acara" class="nav-link"><i class="fa-solid fa-calendar-days"></i></a></li>
+            <li><a href="#story" title="Love Story" class="nav-link"><i class="fa-solid fa-timeline"></i></a></li>
+            <li><a href="#gallery" title="Galeri" class="nav-link"><i class="fa-solid fa-images"></i></a></li>
+            <li><a href="#hadiah" title="Amplop Digital" class="nav-link"><i class="fa-solid fa-gift"></i></a></li>
+            <li><a href="#ucapan" title="Buku Tamu" class="nav-link"><i class="fa-solid fa-comments"></i></a></li>
+        </ul>
+    </nav>
+
+    <!-- =========================================
+         12. FLOATING MUSIC PLAYER BUTTON
+         ========================================= -->
+    <button class="music-btn" id="musicBtn" style="display: none;" aria-label="Kontrol Musik">
+        <i class="fa-solid fa-volume-high" id="music-icon"></i>
+    </button>
+
+    <!-- =========================================
+         13. LIGHTBOX MODAL UNTUK GALERI FOTO
+         ========================================= -->
+    <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog">
+        <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+        <div class="lightbox-dialog">
+            <button class="lightbox-btn lightbox-close" id="lightbox-close" aria-label="Tutup Galeri">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="Foto Sebelumnya">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="lightbox-image-wrapper">
+                <img id="lightbox-img" src="" alt="Detail Foto Galeri" class="lightbox-img">
+                <p id="lightbox-caption" class="lightbox-caption"></p>
+            </div>
+            <button class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="Foto Berikutnya">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script src="script.js"></script>
+</body>
+
+</html>

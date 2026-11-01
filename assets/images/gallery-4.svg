@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#384e73"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#g4)"/>
+  <!-- Gold Ring & Sparks -->
+  <circle cx="300" cy="270" r="140" fill="none" stroke="#dfc19c" stroke-width="4"/>
+  <circle cx="300" cy="270" r="130" fill="none" stroke="#ecd7be" stroke-width="1.5" stroke-dasharray="10 5"/>
+  <polygon points="300,120 310,135 300,150 290,135" fill="#dfc19c"/>
+  <!-- Couple Holding Ring -->
+  <text x="300" y="320" fill="#ecd7be" font-family="'Great Vibes', cursive" font-size="44" text-anchor="middle">A &amp; D</text>
+  <text x="300" y="570" fill="#d9b68a" font-family="'Montserrat', sans-serif" font-size="16" letter-spacing="4" text-anchor="middle" font-weight="600">THE SACRED VOW</text>
+</svg>

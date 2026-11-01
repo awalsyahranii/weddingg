@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgBride" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdf4eb"/>
+      <stop offset="50%" stop-color="#f2dfd0"/>
+      <stop offset="100%" stop-color="#d4b49e"/>
+    </linearGradient>
+    <linearGradient id="dressGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbf9"/>
+      <stop offset="100%" stop-color="#e9dfd6"/>
+    </linearGradient>
+    <linearGradient id="skinGradBride" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff0e6"/>
+      <stop offset="100%" stop-color="#f5d6c4"/>
+    </linearGradient>
+    <linearGradient id="veilGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#eedcd0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="400" fill="url(#bgBride)"/>
+  <circle cx="200" cy="200" r="180" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.5"/>
+  <circle cx="200" cy="140" r="120" fill="#fff" opacity="0.2"/>
+
+  <g transform="translate(0, 20)">
+    <!-- Bridal Dress / Veil Shoulders -->
+    <path d="M90,380 C90,260 130,225 200,225 C270,225 310,260 310,380 Z" fill="url(#dressGrad)"/>
+    
+    <!-- Veil Flowing -->
+    <path d="M140,140 C120,200 110,300 100,380 L300,380 C290,300 280,200 260,140 Z" fill="url(#veilGrad)" opacity="0.6"/>
+
+    <!-- Neck -->
+    <rect x="187" y="190" width="26" height="45" rx="5" fill="url(#skinGradBride)"/>
+
+    <!-- Face -->
+    <ellipse cx="200" cy="150" rx="38" ry="46" fill="url(#skinGradBride)"/>
+
+    <!-- Hijab / Hair Frame -->
+    <path d="M152,148 C152,100 170,85 200,85 C230,85 248,100 248,148 C248,195 230,225 200,225 C170,225 152,195 152,148 Z" fill="none" stroke="#f6ece4" stroke-width="8"/>
+    
+    <!-- Hijab Wrap -->
+    <path d="M158,135 C158,95 174,88 200,88 C226,88 242,95 242,135 C242,150 238,185 200,198 C162,185 158,150 158,135 Z" fill="#fdfbf9" opacity="0.95"/>
+    <!-- Face Inner Reveal -->
+    <ellipse cx="200" cy="152" rx="30" ry="38" fill="url(#skinGradBride)"/>
+
+    <!-- Bridal Tiara / Crown Accent -->
+    <path d="M178,108 Q200,92 222,108" stroke="#d9b68a" stroke-width="3" fill="none"/>
+    <circle cx="200" cy="94" r="3.5" fill="#dfc19c"/>
+    <circle cx="188" cy="100" r="2.5" fill="#dfc19c"/>
+    <circle cx="212" cy="100" r="2.5" fill="#dfc19c"/>
+
+    <!-- Bridal Necklace -->
+    <path d="M185,220 Q200,232 215,220" stroke="#d9b68a" stroke-width="2" fill="none"/>
+    <circle cx="200" cy="228" r="3" fill="#dfc19c"/>
+  </g>
+</svg>

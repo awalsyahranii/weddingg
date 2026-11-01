@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 60" fill="none">
+  <!-- Rose / Floral Petal in soft warm champagne pink tone -->
+  <path d="M25,5 C12,12 8,32 18,48 C28,60 42,48 44,30 C46,15 35,2 25,5 Z" fill="#e8cbb1" fill-opacity="0.85"/>
+  <path d="M25,12 C20,25 22,40 28,45" stroke="#d4ab8a" stroke-width="0.8" stroke-opacity="0.6"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4c6a87"/>
+      <stop offset="100%" stop-color="#2b3a55"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#g1)"/>
+  <circle cx="300" cy="260" r="220" fill="url(#glow1)"/>
+  <circle cx="300" cy="300" r="240" fill="none" stroke="#d9b68a" stroke-width="2" stroke-dasharray="8 6" opacity="0.4"/>
+  <!-- Couple Silhouette -->
+  <path d="M210,540 C210,380 250,340 280,340 C300,340 310,360 320,540 Z" fill="#ffffff" opacity="0.85"/>
+  <ellipse cx="270" cy="290" rx="28" ry="34" fill="#ffffff" opacity="0.9"/>
+  <path d="M290,540 C290,400 320,360 350,360 C380,360 410,430 420,540 Z" fill="#ecd7be" opacity="0.75"/>
+  <ellipse cx="340" cy="310" rx="24" ry="30" fill="#ecd7be" opacity="0.85"/>
+  <!-- Text Overlay -->
+  <text x="300" y="570" fill="#d9b68a" font-family="'Montserrat', sans-serif" font-size="16" letter-spacing="4" text-anchor="middle" font-weight="600">THE FIRST CHAPTER</text>
+</svg>

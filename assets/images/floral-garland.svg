@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" fill="none">
+  <g opacity="0.9">
+    <!-- Curved center stem -->
+    <path d="M20,40 Q200,10 380,40" stroke="#7a9ab5" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- Central Blossom -->
+    <circle cx="200" cy="25" r="10" fill="#dfc19c"/>
+    <circle cx="200" cy="25" r="4.5" fill="#a47b4d"/>
+    <circle cx="184" cy="22" r="6" fill="#ecd7be"/>
+    <circle cx="216" cy="22" r="6" fill="#ecd7be"/>
+    
+    <!-- Left Leaves & Buds -->
+    <path d="M160,25 C145,15 150,0 165,10 C172,18 165,30 160,25 Z" fill="#84a6c4"/>
+    <path d="M125,28 C110,20 112,5 125,15 C132,22 128,33 125,28 Z" fill="#9bb7ce"/>
+    <path d="M90,32 C75,25 78,12 90,20 C96,26 93,37 90,32 Z" fill="#759bbd"/>
+    <circle cx="145" cy="18" r="4.5" fill="#dfc19c"/>
+    <circle cx="108" cy="22" r="3.5" fill="#ecd7be"/>
+    <circle cx="70" cy="30" r="3.5" fill="#dfc19c"/>
+    <circle cx="35" cy="38" r="3" fill="#ecd7be"/>
+
+    <!-- Right Leaves & Buds -->
+    <path d="M240,25 C255,15 250,0 235,10 C228,18 235,30 240,25 Z" fill="#84a6c4"/>
+    <path d="M275,28 C290,20 288,5 275,15 C268,22 272,33 275,28 Z" fill="#9bb7ce"/>
+    <path d="M310,32 C325,25 322,12 310,20 C304,26 307,37 310,32 Z" fill="#759bbd"/>
+    <circle cx="255" cy="18" r="4.5" fill="#dfc19c"/>
+    <circle cx="292" cy="22" r="3.5" fill="#ecd7be"/>
+    <circle cx="330" cy="30" r="3.5" fill="#dfc19c"/>
+    <circle cx="365" cy="38" r="3" fill="#ecd7be"/>
+  </g>
+</svg>

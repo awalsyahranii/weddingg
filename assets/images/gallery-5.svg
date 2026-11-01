@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#94b2cd"/>
+      <stop offset="100%" stop-color="#4c6a87"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#g5)"/>
+  <!-- Elegant Floral Geometric Pattern -->
+  <circle cx="300" cy="270" r="160" fill="rgba(255,255,255,0.15)"/>
+  <rect x="180" y="150" width="240" height="240" fill="none" stroke="#ecd8c3" stroke-width="2" transform="rotate(45 300 270)" opacity="0.6"/>
+  <!-- Couple Candid Hands & Bouquet -->
+  <circle cx="300" cy="270" r="45" fill="#ecd7be" opacity="0.9"/>
+  <circle cx="270" cy="250" r="30" fill="#dfc19c"/>
+  <circle cx="330" cy="250" r="30" fill="#f4e5d4"/>
+  <text x="300" y="570" fill="#fdfbf9" font-family="'Montserrat', sans-serif" font-size="16" letter-spacing="4" text-anchor="middle" font-weight="600">HAND IN HAND</text>
+</svg>

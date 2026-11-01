@@ -1,0 +1,2880 @@
+/* =========================================================
+   UNDANGAN PERNIKAHAN DIGITAL - HARI & DILLA
+   Tema: Romantic, Elegant, Luxurious Romantic Luxury Maroon & Gold
+   Mobile-First Design System with Complete Browser Protection
+   ========================================================= */
+
+/* --- 1. DESIGN TOKENS & ROOTS --- */
+:root {
+    color-scheme: only light !important;
+    forced-color-adjust: none !important;
+    -webkit-color-scheme: light !important;
+
+    /* Palette Warna Utama */
+    --color-primary-bg: #961c36;       /* Merah crimson mewah */
+    --color-primary-dark: #4a0e17;     /* Merah maroon pekat */
+    --color-primary-text: #1e293b;     /* Slate pekat untuk judul & teks penting */
+    --color-secondary-bg: #fdf2f4;     /* Soft blush rose lembut untuk background card/section */
+    --color-body-text: #475569;        /* Abu-abu netral elegan */
+    
+    /* Aksen Emas & Champagne */
+    --color-gold: #d9b68a;
+    --color-gold-light: #ecd8c3;
+    --color-gold-dark: #a47b4d;
+    --color-champagne-bg: #fdf8f3;
+
+    /* Bayangan & Efek */
+    --shadow-soft: 0 10px 30px rgba(74, 14, 23, 0.08);
+    --shadow-card: 0 15px 40px rgba(74, 14, 23, 0.12);
+    --shadow-floating: 0 6px 20px rgba(0, 0, 0, 0.18);
+    --border-radius-card: 28px;
+}
+
+/* --- 2. GLOBAL RESET & BASE STYLES --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    forced-color-adjust: none !important;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background-color: #4a0e17; /* Desktop backdrop */
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-primary-text);
+    background-color: #f7ebed;
+    background-image: radial-gradient(#ebd0d5 1px, transparent 1px), radial-gradient(#ebd0d5 1px, #f7ebed 1px);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+/* Lock scroll saat cover masih aktif */
+#body-root {
+    overflow: hidden;
+}
+#body-root.scroll-enabled {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* Desktop container: undangan dipusatkan dengan max-width mobile premium */
+.main-wrapper {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* --- 3. TYPOGRAPHY HELPERS --- */
+.script-title {
+    font-family: 'Alex Brush', 'Playfair Display', cursive;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.couple-name {
+    font-family: 'Playfair Display', 'Cinzel', serif;
+    font-size: 2.7rem;
+    font-style: italic;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    margin: 8px 0;
+    letter-spacing: 0.5px;
+}
+
+/* --- 4. ANIMASI PARTIKEL CONFETTI --- */
+.plastic-particle {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 99999;
+    animation: blast 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.plastic-particle.white { background: rgba(255, 255, 255, 0.9); }
+.plastic-particle.blue, .plastic-particle.red { background: rgba(180, 50, 75, 0.85); }
+.plastic-particle.dark-blue, .plastic-particle.dark-red { background: rgba(74, 14, 23, 0.85); }
+.plastic-particle.gold { background: rgba(217, 182, 138, 0.95); }
+.plastic-particle.circle { border-radius: 50%; }
+
+@keyframes blast {
+    0% {
+        transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+        opacity: 1;
+    }
+    70% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.1) rotate(var(--rot));
+        opacity: 0;
+    }
+}
+
+/* --- 5. ANIMASI DAUN & KELOPAK JATUH --- */
+.leaves-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 90;
+}
+
+.leaf-wrapper {
+    position: fixed;
+    top: -60px;
+    pointer-events: none;
+    user-select: none;
+    will-change: transform, opacity;
+}
+
+.leaf-img {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    will-change: transform;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+}
+
+@keyframes leafFall {
+    0% { transform: translateY(0); opacity: 0; }
+    12% { opacity: 0.85; }
+    85% { opacity: 0.85; }
+    100% { transform: translateY(108vh); opacity: 0; }
+}
+
+@keyframes leafFallInitial {
+    0% { opacity: 0.85; }
+    85% { opacity: 0.85; }
+    100% { transform: translateY(108vh); opacity: 0; }
+}
+
+@keyframes leafSway {
+    0% { transform: translateX(-30px); }
+    100% { transform: translateX(30px); }
+}
+
+@keyframes leafRotate1 {
+    0% { transform: rotate(0deg) rotateY(0deg); }
+    50% { transform: rotate(180deg) rotateY(180deg); }
+    100% { transform: rotate(360deg) rotateY(360deg); }
+}
+
+@keyframes leafRotate2 {
+    0% { transform: rotate(0deg) rotateX(0deg); }
+    50% { transform: rotate(-180deg) rotateX(180deg); }
+    100% { transform: rotate(-360deg) rotateX(360deg); }
+}
+
+/* --- 6. SCROLL ANIMATION (FADE IN & APPEAR) --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 7. ORNAMEN BUNGA SUDUT --- */
+.corner-flower-top {
+    position: absolute;
+    top: 0;
+    width: 105px;
+    max-width: 26vw;
+    height: auto;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.corner-flower-top.left-corner {
+    left: 0;
+    transform: scaleY(-1);
+}
+
+.corner-flower-top.right-corner {
+    right: 0;
+    transform: scale(-1, -1);
+}
+
+.corner-flower {
+    position: absolute;
+    bottom: 0;
+    width: 110px;
+    max-width: 26vw;
+    height: auto;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.corner-flower.left-corner {
+    left: 0;
+    transform: none;
+}
+
+.corner-flower.right-corner {
+    right: 0;
+    transform: scaleX(-1);
+}
+
+/* =========================================
+   8. COVER PAGE (FULLSCREEN OVERLAY)
+   ========================================= */
+.cover-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background-color: #34070e;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px);
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease-in-out;
+}
+
+/* Layer 1: Stronger Romantic Dreamy Bokeh Blur Background */
+.cover-bg-blur {
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    right: -40px;
+    bottom: -40px;
+    background-image: url('assets/foto/foto1.JPG');
+    background-size: cover;
+    background-position: center;
+    filter: blur(30px) brightness(0.85) saturate(1.25);
+    transform: scale(1.2);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Layer 2: Romantic Vignette & Soft Tint Overlay */
+.cover-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 25%, rgba(250, 225, 230, 0.5) 0%, rgba(130, 26, 48, 0.6) 65%, rgba(40, 10, 16, 0.78) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Arch Frame Lines Elegan di Latar Belakang Cover */
+.cover-container::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 392px);
+    height: auto;
+    border: 1.5px solid rgba(217, 182, 138, 0.45);
+    border-radius: 195px 195px 24px 24px;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.cover-container::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(86%, 368px);
+    height: auto;
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 185px 185px 20px 20px;
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* 4 Sudut Bunga Cover (Atas Kiri & Kanan, Bawah Kiri & Kanan) */
+.cover-corner-flower {
+    position: absolute;
+    width: 110px;
+    max-width: 26vw;
+    height: auto;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.95;
+    filter: drop-shadow(0 4px 10px rgba(74, 14, 23, 0.12));
+}
+
+.cover-corner-flower.top-left {
+    top: 0;
+    left: 0;
+    transform: scaleY(-1);
+}
+
+.cover-corner-flower.top-right {
+    top: 0;
+    right: 0;
+    transform: scale(-1, -1);
+}
+
+.cover-corner-flower.bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: none;
+}
+
+.cover-corner-flower.bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: scaleX(-1);
+}
+
+.cover-container.cover-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cover-content {
+    max-width: 420px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 12;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 34px 16px 14px;
+    box-sizing: border-box;
+}
+
+/* 1. Header & Nama di Atas */
+.cover-header-group {
+    margin-top: 8px;
+    margin-bottom: 6px;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cover-tagline {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 3.5px;
+    color: #a47b4d;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 3px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(217, 182, 138, 0.4);
+    display: inline-block;
+    margin-bottom: 3px;
+    box-shadow: 0 2px 8px rgba(164, 123, 77, 0.12);
+}
+
+.cover-title-name {
+    font-family: 'Playfair Display', 'Cinzel', serif;
+    font-size: 2.3rem;
+    font-weight: 700;
+    font-style: italic;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin: 2px 0 0;
+    text-shadow: 0 2px 14px rgba(48, 10, 18, 0.9), 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* 2. Foto di Tengah dengan Arched Luxury Frame */
+.cover-photo-container {
+    position: relative;
+    width: 210px;
+    height: 235px;
+    margin: 2px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 12;
+}
+
+.cover-photo-glow {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(217, 182, 138, 0.3) 55%, transparent 75%);
+    z-index: 1;
+    pointer-events: none;
+    animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Box Pembungkus Presisi: Bunga Menempel Pas di Tepi Bingkai */
+.cover-photo-box {
+    position: relative;
+    width: 180px;
+    height: 225px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover-photo-frame-wrap {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 90px 90px 18px 18px;
+    border: 3px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 28px rgba(40, 10, 16, 0.35), 0 0 0 1.5px rgba(217, 182, 138, 0.5);
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.cover-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+    transition: transform 0.5s ease;
+}
+
+.cover-photo:hover {
+    transform: scale(1.04);
+}
+
+/* Dekorasi Bunga Presisi di Tepi Bingkai Foto */
+.cover-frame-flower {
+    position: absolute;
+    height: auto;
+    z-index: 5;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 10px rgba(40, 10, 16, 0.3));
+    transition: transform 0.4s ease;
+}
+
+.cover-frame-flower.flower-bottom-left {
+    width: 62px;
+    bottom: -6px;
+    left: -8px;
+    transform: rotate(0deg);
+}
+
+.cover-frame-flower.flower-bottom-right {
+    width: 62px;
+    bottom: -6px;
+    right: -8px;
+    transform: scaleX(-1);
+}
+
+/* 3. Blurred Photo Glassmorphism Guest Card Box */
+.guest-card-box {
+    position: relative;
+    width: 100%;
+    max-width: 310px;
+    margin: 3px auto 6px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 24px rgba(32, 7, 12, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    z-index: 15;
+}
+
+.guest-card-bg-blur {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background-image: url('assets/foto/foto1.JPG');
+    background-size: cover;
+    background-position: center bottom;
+    filter: blur(20px) brightness(0.55) saturate(1.3);
+    transform: scale(1.2);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.guest-card-content {
+    position: relative;
+    z-index: 2;
+    padding: 10px 16px;
+    background: rgba(40, 10, 16, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.guest-card-box .greeting-title {
+    font-size: 0.88rem;
+    color: #ffffff;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.35;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.2px;
+}
+
+.guest-card-box .greeting-subtitle {
+    font-size: 0.88rem;
+    color: #ffffff;
+    font-weight: 500;
+    margin: 1px 0 6px;
+    line-height: 1.35;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.2px;
+}
+
+.guest-card-box .guest-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.42rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 2px 0 6px;
+    letter-spacing: 0.4px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+.guest-card-box .guest-location {
+    font-size: 0.88rem;
+    color: #ffffff;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.35;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.2px;
+}
+
+/* 4. Tombol Buka Undangan Modern Pulse */
+.btn-open {
+    background: linear-gradient(135deg, #4a0e17 0%, #7d182e 100%);
+    color: #ffffff;
+    border: 1px solid rgba(217, 182, 138, 0.55);
+    padding: 10px 24px;
+    border-radius: 28px;
+    font-size: 0.92rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    box-shadow: 0 6px 20px rgba(60, 12, 20, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s;
+    z-index: 15;
+    margin-bottom: 6px;
+    animation: pulseButtonModern 2.5s infinite;
+}
+
+.btn-open:hover {
+    transform: translateY(-2px) scale(1.03);
+    background: linear-gradient(135deg, #2d060c 0%, #5c1120 100%);
+    box-shadow: 0 10px 26px rgba(60, 12, 20, 0.45);
+}
+
+.btn-open:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.btn-open-icon {
+    font-size: 0.95rem;
+    color: #f6e2cc;
+}
+
+.btn-open-arrow {
+    font-size: 0.75rem;
+    opacity: 0.85;
+    transition: transform 0.2s ease;
+}
+
+.btn-open:hover .btn-open-arrow {
+    transform: translateX(3px);
+}
+
+@keyframes pulseButtonModern {
+    0%, 100% {
+        box-shadow: 0 6px 20px rgba(60, 12, 20, 0.35);
+    }
+    50% {
+        box-shadow: 0 8px 28px rgba(150, 28, 54, 0.55), 0 0 0 4px rgba(217, 182, 138, 0.25);
+    }
+}
+
+@keyframes pulseButton {
+    0%, 100% { box-shadow: 0 6px 20px rgba(74, 14, 23, 0.28); }
+    50% { box-shadow: 0 8px 28px rgba(150, 28, 54, 0.45); }
+}
+
+/* =========================================
+   9. HERO SECTION
+   ========================================= */
+.hero-section {
+    background-color: #f7fafc;
+    background-image: 
+        radial-gradient(circle at 50% 10%, rgba(217, 182, 138, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(150, 28, 54, 0.1) 0%, transparent 50%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-inner {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-pill-badge {
+    background: linear-gradient(135deg, #d9b68a 0%, #a47b4d 100%);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 5px 18px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 10px rgba(164, 123, 77, 0.25);
+    position: relative;
+    z-index: 12;
+}
+
+.wedding-subtitle {
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+    font-size: 1.85rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 18px;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 12;
+    padding: 0 10px;
+}
+
+/* Hero Arched Photo Container */
+.hero-img-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-photo {
+    position: absolute;
+    width: 72%;
+    height: 72%;
+    object-fit: cover;
+    object-position: center 38%;
+    z-index: 1;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(74, 14, 23, 0.2);
+}
+
+.hero-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 6px 14px rgba(74, 14, 23, 0.15));
+}
+
+.wedding-date {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-body-text);
+    margin-top: -2px;
+    margin-bottom: 28px;
+    letter-spacing: 0.8px;
+}
+
+/* Countdown Wrapper */
+.countdown-wrapper {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201, 127, 142, 0.4);
+    border-radius: 24px;
+    padding: 22px 18px 18px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 10px 30px rgba(74, 14, 23, 0.08);
+}
+
+.countdown-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-primary-text);
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+}
+
+.countdown-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.countdown-box {
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: #ffffff;
+    width: 62px;
+    height: 74px;
+    border-radius: 20px 20px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(74, 14, 23, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.count-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.count-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.85;
+}
+
+.countdown-status {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #28a745;
+    margin-top: 10px;
+}
+
+/* =========================================
+   10. SECTION DO'A & AYAT SUCI (VERSE)
+   ========================================= */
+.verse-section {
+    background-color: var(--color-primary-bg);
+    background-image: 
+        linear-gradient(rgba(74, 14, 23, 0.85), rgba(150, 28, 54, 0.85)),
+        radial-gradient(#c97f8e 1px, transparent 1px);
+    background-size: auto, 24px 24px;
+    text-align: center;
+    padding: 70px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.verse-container {
+    max-width: 420px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.verse-card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border-radius: var(--border-radius-card);
+    padding: 38px 22px 32px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(201, 127, 142, 0.4);
+    position: relative;
+    outline: 1px dashed rgba(150, 28, 54, 0.35);
+    outline-offset: -8px;
+}
+
+.verse-ornament-wrapper {
+    margin-top: -10px;
+    margin-bottom: 12px;
+}
+
+.verse-ornament {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    display: inline-block;
+    filter: drop-shadow(0 4px 10px rgba(74, 14, 23, 0.12));
+}
+
+.verse-bismillah {
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.verse-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin: 10px 0 16px;
+    line-height: 2.2;
+    direction: rtl;
+    padding: 0 4px;
+}
+
+.quote-icon {
+    font-size: 1.2rem;
+    color: var(--color-gold);
+    margin-bottom: 10px;
+}
+
+.verse-text {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--color-primary-text);
+    line-height: 1.75;
+    margin-bottom: 20px;
+    padding: 0 8px;
+    font-weight: 500;
+}
+
+.verse-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.verse-divider .line {
+    height: 1px;
+    width: 45px;
+    background: linear-gradient(90deg, transparent, #961c36, transparent);
+}
+
+.verse-divider i {
+    font-size: 0.75rem;
+    color: #961c36;
+    opacity: 0.8;
+}
+
+.verse-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 20px;
+    border-radius: 20px;
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 12px rgba(74, 14, 23, 0.2);
+}
+
+/* =========================================
+   11. SECTION MEMPELAI (BRIDE & GROOM)
+   ========================================= */
+.couple-section {
+    background-color: var(--color-secondary-bg);
+    text-align: center;
+    padding: 70px 20px 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.couple-card-unified {
+    position: relative;
+    overflow: hidden;
+    max-width: 430px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border-radius: var(--border-radius-card);
+    padding: 38px 22px 35px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(201, 127, 142, 0.4);
+}
+
+.card-corner-ornament {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.card-corner-ornament.top-left { top: 0; left: 0; }
+.card-corner-ornament.top-right { top: 0; right: 0; transform: scaleX(-1); }
+.card-corner-ornament.bottom-left { bottom: 0; left: 0; }
+.card-corner-ornament.bottom-right { bottom: 0; right: 0; transform: scaleX(-1); }
+
+.card-header-garland {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto 8px;
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(74, 14, 23, 0.12));
+}
+
+.section-tagline {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-primary-bg);
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.salam-title {
+    font-size: 2.2rem;
+    color: var(--color-primary-text);
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 2;
+}
+
+.couple-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 8px auto 14px;
+    width: 60%;
+}
+
+.couple-divider .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #961c36, transparent);
+}
+
+.couple-divider i {
+    font-size: 0.75rem;
+    color: #961c36;
+    opacity: 0.8;
+}
+
+.intro-text {
+    font-size: 0.84rem;
+    color: var(--color-body-text);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    padding: 0 6px;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+/* Profil Mempelai Individual */
+.profile-block {
+    position: relative;
+    z-index: 2;
+}
+
+.profile-img-container {
+    position: relative;
+    width: 220px; 
+    height: 220px;
+    margin: 0 auto 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img {
+    position: absolute;
+    width: 72%; 
+    height: 72%;
+    object-fit: cover;
+    object-position: center 38%;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.flower-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 6px 14px rgba(74, 14, 23, 0.15));
+}
+
+.couple-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #961c36 0%, #6b1426 100%);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 18px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    box-shadow: 0 3px 8px rgba(74, 14, 23, 0.2);
+}
+
+.name-title {
+    font-size: 2.3rem;
+    color: var(--color-primary-text);
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.parents-box {
+    background: rgba(253, 242, 244, 0.75);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin: 4px auto 0;
+    max-width: 320px;
+    border: 1px dashed rgba(150, 28, 54, 0.25);
+}
+
+.parents-text {
+    font-size: 0.84rem;
+    color: var(--color-body-text);
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Instagram Profile Button */
+.btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 7px 18px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #961c36;
+    background: #ffffff;
+    border: 1.5px solid rgba(212, 175, 55, 0.7);
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(74, 14, 23, 0.08);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-instagram i {
+    font-size: 1.05rem;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-instagram:hover {
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(150, 28, 54, 0.25);
+}
+
+.btn-instagram:hover i {
+    -webkit-text-fill-color: #ffffff;
+}
+
+/* Ampersand Divider */
+.ampersand-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 28px auto;
+    width: 85%;
+    position: relative;
+    z-index: 2;
+}
+
+.ampersand-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(150, 28, 54, 0.35), transparent);
+}
+
+.ampersand-circle {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #6b1426 0%, #4a0e17 100%);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.9rem;
+    box-shadow: 0 4px 12px rgba(74, 14, 23, 0.25);
+    border: 3px solid #ffffff;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   12. SECTION ACARA & GOOGLE MAPS
+   ========================================= */
+.event-section {
+    background-color: var(--color-primary-bg);
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%23fdf2f4' fill-opacity='0.25' d='M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,213.3C672,224,768,192,864,170.7C960,149,1056,139,1152,149.3C1248,160,1344,192,1392,208L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%23fdf2f4' fill-opacity='0.5' d='M0,128L48,138.7C96,149,192,171,288,160C384,149,480,107,576,106.7C672,107,768,149,864,170.7C960,192,1056,192,1152,170.7C1248,149,1344,107,1392,85.3L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%23fdf2f4' fill-opacity='1' d='M0,64L48,80C96,96,192,128,288,117.3C384,107,480,53,576,58.7C672,64,768,128,864,138.7C960,149,1056,107,1152,85.3C1248,64,1344,64,1392,64L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+    background-position: top center;
+    background-size: 100% 100px;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 90px 20px 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-header-container {
+    margin-bottom: 25px;
+}
+
+.event-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #f7ebed;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.section-title-light {
+    color: #ffffff !important;
+    font-size: 2.8rem;
+    margin-bottom: 8px;
+}
+
+.event-subtitle {
+    font-size: 0.84rem;
+    color: #f5dbe1;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+/* Event Banner Photo */
+.event-photo-container {
+    position: relative;
+    margin: -10px auto 30px;
+    width: 100%;
+    max-width: 340px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.7);
+}
+
+.event-photo {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center 60%;
+    display: block;
+}
+
+/* Kartu Acara */
+.event-card-box {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 30px 20px 25px;
+    max-width: 380px;
+    margin: 0 auto 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+}
+
+.event-icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin: -55px auto 14px;
+    box-shadow: 0 6px 15px rgba(74, 14, 23, 0.3);
+    border: 3px solid #ffffff;
+}
+
+.event-card-title {
+    font-size: 2.3rem;
+    color: var(--color-primary-text);
+    margin-bottom: 12px;
+}
+
+.event-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: var(--color-body-text);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.event-info-item i {
+    color: var(--color-primary-bg);
+}
+
+.event-info-item.location {
+    flex-direction: column;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 0.84rem;
+    line-height: 1.6;
+}
+
+.event-section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px auto;
+    width: 60%;
+}
+
+.event-section-divider span {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+.event-section-divider i {
+    color: #ffffff;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Google Maps Iframe Container */
+.event-map-container {
+    width: 100%;
+    margin: 16px auto 16px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f0ccd3;
+}
+
+.event-map-container iframe {
+    display: block;
+    width: 100%;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: #ffffff;
+    border: none;
+    padding: 11px 24px;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(74, 14, 23, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(74, 14, 23, 0.3);
+}
+
+/* =========================================
+   13. SECTION OUR LOVE STORY / JOURNEY
+   ========================================= */
+.story-section {
+    background-color: var(--color-secondary-bg);
+    text-align: center;
+    padding: 70px 20px 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.story-title-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 45px;
+}
+
+.story-bg-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: rgba(150, 28, 54, 0.15);
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+}
+
+.story-script-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    font-size: 2.8rem;
+    color: var(--color-primary-text);
+    white-space: nowrap;
+    margin: 0;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.story-timeline {
+    position: relative;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 10px 0 20px;
+}
+
+.story-timeline::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    bottom: 20px;
+    left: 20px;
+    width: 2px;
+    border-left: 2px dashed #c97f8e;
+}
+
+.story-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 52px;
+    padding-left: 52px;
+    text-align: left;
+}
+
+.story-node {
+    position: absolute;
+    left: 4px;
+    top: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    box-shadow: 0 0 0 4px rgba(250, 228, 232, 0.9), 0 4px 10px rgba(74, 14, 23, 0.2);
+    z-index: 2;
+}
+
+.story-card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 22px 18px 20px;
+    box-shadow: 0 8px 24px rgba(74, 14, 23, 0.08);
+    border: 1px solid rgba(201, 127, 142, 0.35);
+    width: 100%;
+}
+
+.story-photo-wrapper {
+    margin: -48px auto 14px;
+    width: 90%;
+    max-width: 240px;
+    background: #ffffff;
+    padding: 6px 6px 12px 6px;
+    border-radius: 6px;
+    box-shadow: 0 8px 20px rgba(74, 14, 23, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.story-photo-wrapper.tilt-left { transform: rotate(-2.5deg); }
+.story-photo-wrapper.tilt-right { transform: rotate(2.5deg); }
+.story-photo-wrapper:hover { transform: rotate(0deg) scale(1.02); }
+
+.story-photo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+.story-photo.story-photo-1 { object-position: center 50%; }
+.story-photo.story-photo-2 { object-position: center 58%; }
+.story-photo.story-photo-3 { object-position: center 52%; }
+.story-photo.story-photo-4 { object-position: center 55%; }
+
+.story-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #961c36 0%, #6b1426 100%);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+
+.story-heading {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary-text);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.story-divider {
+    height: 2px;
+    width: 35px;
+    background: linear-gradient(90deg, #961c36, transparent);
+    margin-bottom: 8px;
+}
+
+.story-desc {
+    font-size: 0.82rem;
+    color: var(--color-body-text);
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* =========================================
+   14. SECTION GALERI & LIGHTBOX
+   ========================================= */
+.gallery-gift-section {
+    background-color: #ffffff;
+    background-image: radial-gradient(#f7ebed 1px, transparent 1px);
+    background-size: 20px 20px;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.gallery-header-wrapper {
+    margin-bottom: 30px;
+}
+
+.gallery-tagline {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-primary-bg);
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.gallery-subtitle {
+    font-size: 0.84rem;
+    color: var(--color-body-text);
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+/* --- LUXURY ASYMMETRICAL EDITORIAL GALLERY --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: dense;
+    gap: 14px;
+    margin-bottom: 50px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 4px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(74, 14, 23, 0.12);
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    background: #ffffff;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 34px rgba(74, 14, 23, 0.22);
+    border-color: #d4af37;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* Unique Shapes & Dimensions for each Photo */
+/* 1. Big Hero Arch (Span 2 columns, Castle dome top) */
+.gallery-item.item-featured-arch {
+    grid-column: span 2;
+    height: 310px;
+    border-radius: 140px 140px 22px 22px;
+    border-width: 2px;
+}
+.gallery-item.item-featured-arch img {
+    object-position: center 36%;
+}
+
+/* 2. Tall Left Portrait with Soft Bottom Curve */
+.gallery-item.item-tall-left {
+    height: 225px;
+    border-radius: 20px 20px 20px 60px;
+}
+
+/* 3. Arch Right (Curved Top-Right Dome) */
+.gallery-item.item-arch-right {
+    height: 225px;
+    border-radius: 20px 75px 20px 20px;
+}
+
+/* 4. Wide Panoramic Cinema (Span 2 columns) */
+.gallery-item.item-wide-cinema {
+    grid-column: span 2;
+    height: 195px;
+    border-radius: 22px;
+    border-width: 2px;
+}
+
+/* 5. Arch Left (Curved Top-Left Dome) */
+.gallery-item.item-arch-left {
+    height: 235px;
+    border-radius: 75px 20px 20px 20px;
+}
+.gallery-item.item-arch-left img {
+    object-position: center 36%;
+}
+
+/* 6. Tall Right Portrait with Soft Bottom Curve */
+.gallery-item.item-tall-right {
+    height: 235px;
+    border-radius: 20px 20px 60px 20px;
+}
+.gallery-item.item-tall-right img {
+    object-position: center 36%;
+}
+
+/* 7. Rounded Oval Left */
+.gallery-item.item-oval-left {
+    height: 215px;
+    border-radius: 50px 20px 20px 50px;
+}
+
+/* 8. Rounded Oval Right */
+.gallery-item.item-oval-right {
+    height: 215px;
+    border-radius: 20px 50px 50px 20px;
+}
+
+/* Romantic Glass Overlay */
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(74, 14, 23, 0.75) 0%, rgba(74, 14, 23, 0.2) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    padding: 16px;
+    text-align: center;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-zoom-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    color: #961c36;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    border: 1.5px solid #d4af37;
+    transform: scale(0.85);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gallery-item:hover .gallery-zoom-badge {
+    transform: scale(1);
+}
+
+.gallery-pill-caption {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.3px;
+    transform: translateY(6px);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gallery-item:hover .gallery-pill-caption {
+    transform: translateY(0);
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+.lightbox-dialog {
+    position: relative;
+    z-index: 10001;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-img {
+    max-width: 85vw;
+    max-height: 70vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+.lightbox-caption {
+    color: #f1f5f9;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 14px;
+    text-align: center;
+    max-width: 80vw;
+}
+
+.lightbox-btn {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s, transform 0.2s;
+    z-index: 10002;
+}
+
+.lightbox-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.lightbox-close {
+    top: -50px;
+    right: 0;
+}
+
+.lightbox-prev {
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox-next {
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* =========================================
+   15. SECTION WEDDING GIFT / AMPLOP DIGITAL
+   ========================================= */
+.gift-wrapper {
+    padding: 10px;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.gift-icon-badge {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d9b68a 0%, #a47b4d 100%);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(164, 123, 77, 0.3);
+}
+
+.gift-text {
+    font-size: 0.85rem;
+    color: var(--color-body-text);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.btn-gift-toggle {
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 25px;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.gift-cards-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    animation: fadeInDown 0.5s ease-out;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Bank ATM Card Display */
+.atm-card-wrapper {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.atm-card-img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 14px 32px rgba(0, 24, 56, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.atm-card-img:hover {
+    transform: translateY(-4px) scale(1.015);
+    box-shadow: 0 18px 40px rgba(0, 24, 56, 0.38), 0 0 0 1.5px rgba(212, 175, 55, 0.4);
+}
+
+.atm-card-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.atm-info-badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1px solid rgba(201, 127, 142, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(74, 14, 23, 0.05);
+}
+
+.atm-bank-name {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #003882;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.atm-acc-num {
+    font-family: 'Montserrat', monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary-text);
+    letter-spacing: 1px;
+}
+
+.btn-copy-card {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    background: #ffffff;
+    color: #961c36;
+    border: 1.5px solid #d4af37;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.22);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-copy-card i {
+    font-size: 1rem;
+    color: #d4af37;
+    transition: color 0.3s ease;
+}
+
+.btn-copy-card:hover {
+    background: #fdf2f4;
+    border-color: #961c36;
+    color: #961c36;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(150, 28, 54, 0.2);
+}
+
+.btn-copy-card:hover i {
+    color: #961c36;
+}
+
+/* Bank Cards */
+.bank-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fdf2f4 100%);
+    border: 1px solid rgba(201, 127, 142, 0.4);
+    border-radius: 18px;
+    width: 100%;
+    max-width: 340px;
+    padding: 22px 20px;
+    box-shadow: 0 8px 22px rgba(74, 14, 23, 0.08);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+}
+
+.bank-card::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 160px;
+    height: 160px;
+    background: rgba(217, 182, 138, 0.15);
+    border-radius: 50%;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.chip-icon {
+    color: #d4af37;
+    font-size: 1.6rem;
+}
+
+.bank-logo {
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+}
+
+.bank-logo.mandiri { color: #003d79; }
+.bank-logo.bca { color: #003399; font-style: italic; }
+
+.card-body {
+    position: relative;
+    z-index: 2;
+}
+
+.account-label {
+    font-size: 0.72rem;
+    color: #a66874;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.account-number {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #1e293b;
+    margin-bottom: 4px;
+    font-family: 'Montserrat', monospace;
+}
+
+.account-name {
+    font-size: 0.84rem;
+    color: #7a3e47;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.btn-copy {
+    background-color: #ffffff;
+    border: 1px solid #edd3d8;
+    color: var(--color-primary-dark);
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-copy:hover {
+    background-color: var(--color-secondary-bg);
+    border-color: #961c36;
+}
+
+/* Luxury Physical Gift Card */
+.address-card {
+    background: #ffffff;
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 340px;
+    padding: 24px 20px 22px;
+    box-shadow: 0 10px 28px rgba(74, 14, 23, 0.08);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.address-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #d4af37, #961c36, #d4af37);
+}
+
+.gift-badge-header {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #fdf2f4 0%, #fae1e6 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.6);
+    border-radius: 50%;
+    color: #961c36;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 14px rgba(150, 28, 54, 0.12);
+}
+
+.address-card h3 {
+    font-size: 1.15rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.gift-subtitle {
+    font-size: 0.76rem;
+    color: var(--color-body-text);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.gift-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.gift-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #fdf8f9;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(237, 211, 216, 0.7);
+}
+
+.gift-info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #961c36;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.gift-info-content {
+    flex: 1;
+}
+
+.gift-info-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #a66874;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.gift-info-value {
+    font-size: 0.82rem;
+    color: var(--color-primary-text);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.address-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-copy-address {
+    background-color: #ffffff;
+    border: 1.5px solid #d4af37;
+    color: #961c36;
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.18);
+    transition: all 0.3s ease;
+}
+
+.btn-copy-address:hover {
+    background-color: #fdf2f4;
+    border-color: #961c36;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(150, 28, 54, 0.2);
+}
+
+.btn-wa-gift {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-wa-gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.42);
+    color: #ffffff;
+}
+    background: #25d366;
+    color: #ffffff;
+    padding: 9px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+
+.btn-wa-gift:hover {
+    background: #1ebc59;
+}
+
+/* =========================================
+   16. SECTION RSVP & BUKU UCAPAN
+   ========================================= */
+.wishes-section {
+    background-color: var(--color-secondary-bg);
+    text-align: center;
+    padding: 70px 20px 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.wishes-title-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 40px;
+}
+
+.wishes-bg-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.7rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: rgba(150, 28, 54, 0.15);
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+}
+
+.wishes-script-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    font-size: 2.8rem;
+    color: var(--color-primary-text);
+    white-space: nowrap;
+    margin: 0;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.wishes-subtitle {
+    font-size: 0.84rem;
+    color: var(--color-body-text);
+    margin-top: -24px;
+    margin-bottom: 28px;
+    font-weight: 500;
+}
+
+.wishes-container {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* Form RSVP */
+.wishes-form {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(201, 127, 142, 0.35);
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.form-group.half {
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary-text);
+    margin-bottom: 5px;
+}
+
+.form-group label i {
+    color: #961c36;
+    margin-right: 4px;
+}
+
+.wishes-form input,
+.wishes-form select,
+.wishes-form textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #f0ccd3;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.84rem;
+    color: #1e293b;
+    background: #ffffff;
+    color-scheme: only light;
+    forced-color-adjust: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.wishes-form select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23961c36'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 32px;
+}
+
+.wishes-form textarea {
+    resize: vertical;
+    min-height: 75px;
+}
+
+.wishes-form input:focus,
+.wishes-form select:focus,
+.wishes-form textarea:focus {
+    outline: none;
+    border-color: #961c36;
+    box-shadow: 0 0 0 3px rgba(150, 28, 54, 0.18);
+}
+
+.btn-send-wish {
+    width: 100%;
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(74, 14, 23, 0.22);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-send-wish:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(74, 14, 23, 0.3);
+}
+
+/* Header Count Bar */
+.wishes-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 0 4px;
+}
+
+.wishes-count {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--color-primary-text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.wishes-count i {
+    color: #961c36;
+}
+
+/* Feed List Ucapan */
+.wishes-list {
+    max-height: 380px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 4px;
+}
+
+.wishes-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.wishes-list::-webkit-scrollbar-track {
+    background: rgba(250, 228, 232, 0.6);
+    border-radius: 10px;
+}
+
+.wishes-list::-webkit-scrollbar-thumb {
+    background: #c97f8e;
+    border-radius: 10px;
+}
+
+.wish-card {
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 3px 10px rgba(74, 14, 23, 0.05);
+    border: 1px solid rgba(201, 127, 142, 0.28);
+    text-align: left;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    animation: fadeInWish 0.4s ease-out;
+}
+
+@keyframes fadeInWish {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.wish-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.wish-body {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.wish-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+
+.wish-name {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--color-primary-text);
+}
+
+.badge-attend {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.badge-attend.hadir { background: #e6f7ec; color: #1e7e34; }
+.badge-attend.ragu { background: #fff4e6; color: #d97706; }
+.badge-attend.absen { background: #fdf0f0; color: #dc3545; }
+
+.wish-time {
+    font-size: 0.7rem;
+    color: #a66874;
+    margin-bottom: 6px;
+}
+
+.wish-message {
+    font-size: 0.82rem;
+    color: var(--color-body-text);
+    line-height: 1.55;
+    word-break: break-word;
+    margin: 0;
+}
+
+/* =========================================
+   17. SECTION CLOSING / PENUTUP
+   ========================================= */
+.closing-section {
+    background-color: var(--color-primary-bg);
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,213.3C672,224,768,192,864,170.7C960,149,1056,139,1152,149.3C1248,160,1344,192,1392,208L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%23ffffff' fill-opacity='0.3' d='M0,128L48,138.7C96,149,192,171,288,160C384,149,480,107,576,106.7C672,107,768,149,864,170.7C960,192,1056,192,1152,170.7C1248,149,1344,107,1392,85.3L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%23ffffff' fill-opacity='0.5' d='M0,64L48,80C96,96,192,128,288,117.3C384,107,480,53,576,58.7C672,64,768,128,864,138.7C960,149,1056,107,1152,85.3C1248,64,1344,64,1392,64L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+    background-position: top center;
+    background-size: 100% 100px;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 90px 20px 90px;
+    position: relative;
+    overflow: hidden;
+}
+
+.closing-img-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.closing-photo {
+    position: absolute;
+    width: 72%;
+    height: 72%;
+    object-fit: cover;
+    object-position: center 46%;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.closing-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 6px 14px rgba(74, 14, 23, 0.2));
+}
+
+.closing-text {
+    font-size: 0.85rem;
+    color: #f7ebed;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.closing-salam {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.closing-couple-name {
+    color: #ffffff !important;
+    font-size: 3.2rem;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 20px;
+}
+
+.closing-footer-note {
+    font-size: 0.72rem;
+    color: #dba4b0;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+}
+
+/* =========================================
+   18. FLOATING DOCK NAVIGATION
+   ========================================= */
+.floating-menu {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 35px;
+    padding: 7px 12px;
+    box-shadow: var(--shadow-floating);
+    z-index: 100;
+    border: 1px solid rgba(201, 127, 142, 0.4);
+    animation: slideUpNav 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpNav {
+    from { transform: translate(-50%, 40px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.floating-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+.floating-menu li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary-bg);
+    color: #ffffff;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+}
+
+.floating-menu li a:hover,
+.floating-menu li a.active {
+    background-color: var(--color-primary-dark);
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(74, 14, 23, 0.35);
+}
+
+/* =========================================
+   19. FLOATING MUSIC PLAYER BUTTON
+   ========================================= */
+.music-btn {
+    position: fixed;
+    bottom: 82px;
+    left: 20px;
+    background: linear-gradient(135deg, #961c36 0%, #4a0e17 100%);
+    color: white;
+    border: 2px solid #ffffff;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    font-size: 1.15rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-floating);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: transform 0.25s ease, background 0.3s;
+    animation: rotateVinyl 8s linear infinite;
+}
+
+.music-btn.paused {
+    animation-play-state: paused;
+    opacity: 0.75;
+}
+
+@keyframes rotateVinyl {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+}
+
+/* =========================================
+   20. TOAST NOTIFICATION
+   ========================================= */
+.toast-notification {
+    position: fixed;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%) translateY(50px);
+    background: rgba(30, 41, 59, 0.95);
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 10005;
+}
+
+.toast-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* =========================================
+   21. RESPONSIVE BREAKPOINTS
+   ========================================= */
+@media (max-width: 440px) {
+    .floating-menu {
+        padding: 5px 8px;
+        bottom: 14px;
+        max-width: 95%;
+    }
+    .floating-menu ul {
+        gap: 5px;
+    }
+    .floating-menu li a {
+        width: 36px;
+        height: 36px;
+        font-size: 0.88rem;
+        border-radius: 10px;
+    }
+    .music-btn {
+        bottom: 74px;
+        left: 14px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    .couple-name { font-size: 2.8rem; }
+    .cover-content .couple-name { font-size: 3rem; }
+}
+
+@media (max-width: 360px) {
+    .floating-menu {
+        padding: 4px 6px;
+        bottom: 10px;
+    }
+    .floating-menu ul {
+        gap: 3px;
+    }
+    .floating-menu li a {
+        width: 32px;
+        height: 32px;
+        font-size: 0.78rem;
+    }
+    .countdown-box {
+        width: 52px;
+        height: 64px;
+    }
+    .count-number {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-height: 720px) {
+    .cover-container {
+        padding: 12px 12px 16px;
+    }
+    .cover-content {
+        padding: 22px 12px 10px;
+    }
+    .cover-header-group {
+        margin-top: 4px;
+    }
+    .cover-title-name {
+        font-size: 2rem;
+    }
+    .cover-photo-container {
+        width: 220px;
+        height: 255px;
+        margin: 2px auto;
+    }
+    .cover-photo-glow {
+        width: 220px;
+        height: 220px;
+    }
+    .cover-photo-box {
+        width: 195px;
+        height: 240px;
+    }
+    .cover-photo-frame-wrap {
+        width: 100%;
+        height: 100%;
+    }
+    .cover-photo {
+        border-radius: 95px 95px 18px 18px;
+    }
+}
+
+/* =========================================
+   22. FORCE ANTI-DARK MODE PROTECTION
+   ========================================= */
+@media (prefers-color-scheme: dark) {
+    :root, html, body {
+        color-scheme: only light !important;
+        forced-color-adjust: none !important;
+        -webkit-color-scheme: light !important;
+        background-color: #4a0e17 !important;
+        color: #1e293b !important;
+    }
+
+    .main-wrapper {
+        background: #ffffff !important;
+    }
+
+    .cover-container {
+        color: #1e293b !important;
+        background-color: #e4b8c1 !important;
+    }
+
+    .cover-title-name,
+    .couple-name,
+    .name-title,
+    .salam-title,
+    .wedding-subtitle {
+        color: #1e293b !important;
+        text-shadow: none !important;
+    }
+
+    .cover-container .tggl,
+    .cover-container .greeting-text,
+    .intro-text,
+    .parents-text,
+    .wedding-date,
+    .wishes-subtitle,
+    .gift-text {
+        color: #475569 !important;
+    }
+
+    .verse-card,
+    .couple-card-unified,
+    .bank-card,
+    .address-card,
+    .wishes-form,
+    .wish-card,
+    .story-card,
+    .guest-card-box,
+    .countdown-wrapper {
+        background: rgba(255, 255, 255, 0.96) !important;
+        color: #1e293b !important;
+        border-color: rgba(201, 127, 142, 0.4) !important;
+    }
+
+    .wishes-form input,
+    .wishes-form select,
+    .wishes-form textarea {
+        background-color: #ffffff !important;
+        color: #1e293b !important;
+        border-color: #f0ccd3 !important;
+    }
+
+    .floating-menu {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    .floating-menu li a {
+        background-color: #961c36 !important;
+        color: #ffffff !important;
+    }
+}
