@@ -2225,23 +2225,6 @@ body {
     box-shadow: 0 6px 18px rgba(37, 211, 102, 0.42);
     color: #ffffff;
 }
-    background: #25d366;
-    color: #ffffff;
-    padding: 9px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: background 0.2s;
-}
-
-.btn-wa-gift:hover {
-    background: #1ebc59;
-}
 
 /* =========================================
    16. SECTION RSVP & BUKU UCAPAN
