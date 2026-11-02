@@ -7,6 +7,16 @@
     <meta name="theme-color" content="#961c36">
     <title>Generator Kirim Undangan - Hari & Dilla</title>
 
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Kirim Undangan - Hari &amp; Dilla">
+    <meta property="og:description" content="Dashboard Kirim Undangan Pernikahan Hari &amp; Dilla.">
+    <meta property="og:image" content="https://wedding-hari-dilla.vercel.app/assets/images/og-preview.jpg">
+    <meta property="og:image:width" content="1068">
+    <meta property="og:image:height" content="1600">
+    <meta property="og:image:type" content="image/jpeg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -599,6 +609,9 @@
                     <button type="button" class="btn-format" onclick="formatSelection('_')">
                         <i class="fa-solid fa-italic"></i> Miring (_)
                     </button>
+                    <button type="button" class="btn-format" onclick="resetCurrentTemplate()" title="Kembalikan teks ke bawaan template">
+                        <i class="fa-solid fa-arrow-rotate-left"></i> Reset Template
+                    </button>
                 </div>
 
                 <textarea id="teksPengantarPreview" class="form-control" rows="9"></textarea>
@@ -629,6 +642,14 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" id="searchGuestInput" placeholder="Cari nama tamu...">
                 </div>
+            </div>
+
+            <!-- Tip WhatsApp Preview -->
+            <div style="background: #fdf2f4; border: 1px solid #f9d5dc; border-left: 4px solid var(--color-primary); border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; font-size: 0.84rem; color: #6b1426; line-height: 1.5;">
+                <div style="font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-lightbulb" style="color: var(--color-gold);"></i> Tips Agar Foto Undangan Muncul di WhatsApp:
+                </div>
+                Saat tombol <strong>Kirim WA</strong> diklik dan aplikasi WhatsApp terbuka di ponsel, <strong>tunggu 1–2 detik</strong> sampai kartu pratinjau foto pengantin muncul di atas keyboard/pesan, lalu tekan tombol <strong>Kirim</strong>.
             </div>
 
             <!-- List Daftar Tamu -->
@@ -757,6 +778,15 @@ Kehadiran dan doa restumu sangat berarti buat kami. Sampai jumpa di hari bahagia
             searchGuestInput.addEventListener('input', handleSearch);
         });
 
+        // Reset template teks ke bawaan pilihan
+        window.resetCurrentTemplate = function () {
+            const selected = selectTemplate.value;
+            if (templates[selected]) {
+                previewTextarea.value = templates[selected];
+                showToast('Template teks berhasil dikembalikan ke standar awal.');
+            }
+        };
+
         // Generate daftar tamu
         function handleGenerate() {
             const rawInput = inputNamaTamu.value.trim();
@@ -773,16 +803,21 @@ Kehadiran dan doa restumu sangat berarti buat kami. Sampai jumpa di hari bahagia
             const baseUrl = getBaseUrl();
 
             // Tambahkan nama baru ke daftar
-            lines.forEach(nama => {
+            lines.forEach(rawNama => {
+                // Bersihkan karakter pembungkus jika pengguna tidak sengaja mengetik kurung
+                let nama = rawNama.replace(/^[\[\(\{\<]+/, '').replace(/[\]\)\}\>]+$/, '').trim();
+                if (!nama) return;
+
                 // Buat link personal dengan format ?nama=
                 // Encode nama untuk URL (karakter & dan spasi didukung penuh)
                 const encodedNama = encodeURIComponent(nama).replace(/%20/g, '+');
                 const inviteUrl = `${baseUrl}/?nama=${encodedNama}`;
 
-                // Ganti [nama-tamu] dan [link-undangan]
-                const fullMessage = templateMsg
-                    .replace(/\[nama-tamu\]/g, nama)
-                    .replace(/\[link-undangan\]/g, inviteUrl);
+                // Ganti [nama-tamu] dan [link-undangan] secara bersih & menyeluruh
+                // Mendukung variasi [nama-tamu], [nama], [[nama-tamu]], dll
+                let fullMessage = templateMsg
+                    .replace(/\[+ *(?:nama[-_\s]?tamu|nama) *\]+/gi, nama)
+                    .replace(/\[+ *(?:link[-_\s]?undangan|link) *\]+/gi, inviteUrl);
 
                 // Cek jika sudah ada
                 const existingIndex = currentGuestList.findIndex(g => g.name.toLowerCase() === nama.toLowerCase());
@@ -1036,3 +1071,4 @@ Kehadiran dan doa restumu sangat berarti buat kami. Sampai jumpa di hari bahagia
 </body>
 
 </html>
+
